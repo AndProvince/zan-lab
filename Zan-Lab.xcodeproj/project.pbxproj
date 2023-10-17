@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		77A26EC82AC033220012520B /* Zan_LabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EC72AC033220012520B /* Zan_LabApp.swift */; };
+		77A26ECA2AC033220012520B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EC92AC033220012520B /* ContentView.swift */; };
+		77A26ECC2AC033260012520B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77A26ECB2AC033260012520B /* Assets.xcassets */; };
+		77A26ECF2AC033260012520B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77A26ECE2AC033260012520B /* Preview Assets.xcassets */; };
+		77A26ED92AC07BD40012520B /* TopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26ED82AC07BD40012520B /* TopMenu.swift */; };
+		77A26EDB2AC07CC80012520B /* TopSituations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EDA2AC07CC80012520B /* TopSituations.swift */; };
+		77A26EDD2AC07D7E0012520B /* AboutRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EDC2AC07D7E0012520B /* AboutRequests.swift */; };
+		77A26EDF2AC08F520012520B /* SignInWSO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EDE2AC08F520012520B /* SignInWSO.swift */; };
+		77A26EE12AC0A3390012520B /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EE02AC0A3390012520B /* Registration.swift */; };
+		77A26EE42AC410340012520B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EE32AC410340012520B /* User.swift */; };
+		77A26EE62AC4113D0012520B /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EE52AC4113D0012520B /* Tokens.swift */; };
+		77A26EE82AC412BD0012520B /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EE72AC412BD0012520B /* Requester.swift */; };
+		77C0F4E62ACEAD450023989C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0F4E52ACEAD450023989C /* Profile.swift */; };
+		77C0F4E82AD00F820023989C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0F4E72AD00F820023989C /* ProfileView.swift */; };
+		77C0F4EA2AD011740023989C /* ProfileEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0F4E92AD011740023989C /* ProfileEdit.swift */; };
+		77D1805C2AC4820100226CBE /* AuthBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1805B2AC4820100226CBE /* AuthBody.swift */; };
+		77D1805F2AC488BA00226CBE /* UserDefaultsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1805E2AC488BA00226CBE /* UserDefaultsWorker.swift */; };
+		77D180612AC4892B00226CBE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180602AC4892B00226CBE /* Extensions.swift */; };
+		77D180632AC4913300226CBE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180622AC4913300226CBE /* Endpoint.swift */; };
+		77D180652AC4918900226CBE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180642AC4918900226CBE /* Errors.swift */; };
+		77D180672AC569B500226CBE /* CaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180662AC569B500226CBE /* CaseInfo.swift */; };
+		77D1806A2AC5D57900226CBE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180692AC5D57900226CBE /* MainViewModel.swift */; };
+		77D1806C2AC885EC00226CBE /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1806B2AC885EC00226CBE /* Login.swift */; };
+		77D1806E2AC8890A00226CBE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1806D2AC8890A00226CBE /* Search.swift */; };
+		77D180702ACC7ECF00226CBE /* Specialist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D1806F2ACC7ECF00226CBE /* Specialist.swift */; };
+		77D180722ACC871100226CBE /* SpecialiststList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180712ACC871100226CBE /* SpecialiststList.swift */; };
+		77D180742ACD1E0500226CBE /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180732ACD1E0500226CBE /* ImageView.swift */; };
+		77D180762ACD51CB00226CBE /* ButtonsStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D180752ACD51CB00226CBE /* ButtonsStyles.swift */; };
+		77E0A43E2AD07D3A000C8346 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E0A43D2AD07D3A000C8346 /* Step.swift */; };
+		77E0A4402AD3A5B9000C8346 /* Refs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E0A43F2AD3A5B9000C8346 /* Refs.swift */; };
+		77E0A4422AD5B4DD000C8346 /* CreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E0A4412AD5B4DD000C8346 /* CreateRequest.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		77A26EC42AC033220012520B /* Zan-Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zan-Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A26EC72AC033220012520B /* Zan_LabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zan_LabApp.swift; sourceTree = "<group>"; };
+		77A26EC92AC033220012520B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		77A26ECB2AC033260012520B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		77A26ECE2AC033260012520B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		77A26ED82AC07BD40012520B /* TopMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenu.swift; sourceTree = "<group>"; };
+		77A26EDA2AC07CC80012520B /* TopSituations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSituations.swift; sourceTree = "<group>"; };
+		77A26EDC2AC07D7E0012520B /* AboutRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRequests.swift; sourceTree = "<group>"; };
+		77A26EDE2AC08F520012520B /* SignInWSO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWSO.swift; sourceTree = "<group>"; };
+		77A26EE02AC0A3390012520B /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		77A26EE32AC410340012520B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		77A26EE52AC4113D0012520B /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
+		77A26EE72AC412BD0012520B /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
+		77C0F4E52ACEAD450023989C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		77C0F4E72AD00F820023989C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		77C0F4E92AD011740023989C /* ProfileEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEdit.swift; sourceTree = "<group>"; };
+		77D1805B2AC4820100226CBE /* AuthBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBody.swift; sourceTree = "<group>"; };
+		77D1805E2AC488BA00226CBE /* UserDefaultsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsWorker.swift; sourceTree = "<group>"; };
+		77D180602AC4892B00226CBE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		77D180622AC4913300226CBE /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		77D180642AC4918900226CBE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		77D180662AC569B500226CBE /* CaseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseInfo.swift; sourceTree = "<group>"; };
+		77D180692AC5D57900226CBE /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		77D1806B2AC885EC00226CBE /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		77D1806D2AC8890A00226CBE /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		77D1806F2ACC7ECF00226CBE /* Specialist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Specialist.swift; sourceTree = "<group>"; };
+		77D180712ACC871100226CBE /* SpecialiststList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialiststList.swift; sourceTree = "<group>"; };
+		77D180732ACD1E0500226CBE /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		77D180752ACD51CB00226CBE /* ButtonsStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsStyles.swift; sourceTree = "<group>"; };
+		77E0A43D2AD07D3A000C8346 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		77E0A43F2AD3A5B9000C8346 /* Refs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refs.swift; sourceTree = "<group>"; };
+		77E0A4412AD5B4DD000C8346 /* CreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRequest.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		77A26EC12AC033220012520B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		77A26EBB2AC033220012520B = {
+			isa = PBXGroup;
+			children = (
+				77A26EC62AC033220012520B /* Zan-Lab */,
+				77A26EC52AC033220012520B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		77A26EC52AC033220012520B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				77A26EC42AC033220012520B /* Zan-Lab.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		77A26EC62AC033220012520B /* Zan-Lab */ = {
+			isa = PBXGroup;
+			children = (
+				77D180772ACD525000226CBE /* Styles */,
+				77D1805D2AC4889B00226CBE /* Utils */,
+				77D1805A2AC481DB00226CBE /* Model */,
+				77A26EE22AC410040012520B /* Network */,
+				77A26ED52AC079E20012520B /* Views */,
+				77D180682AC5D55E00226CBE /* ViewModel */,
+				77A26EC72AC033220012520B /* Zan_LabApp.swift */,
+				77A26EC92AC033220012520B /* ContentView.swift */,
+				77A26ECB2AC033260012520B /* Assets.xcassets */,
+				77A26ECD2AC033260012520B /* Preview Content */,
+			);
+			path = "Zan-Lab";
+			sourceTree = "<group>";
+		};
+		77A26ECD2AC033260012520B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				77A26ECE2AC033260012520B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		77A26ED52AC079E20012520B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				77D180732ACD1E0500226CBE /* ImageView.swift */,
+				77C0F4E52ACEAD450023989C /* Profile.swift */,
+				77C0F4E72AD00F820023989C /* ProfileView.swift */,
+				77C0F4E92AD011740023989C /* ProfileEdit.swift */,
+				77A26ED82AC07BD40012520B /* TopMenu.swift */,
+				77A26EDA2AC07CC80012520B /* TopSituations.swift */,
+				77A26EDC2AC07D7E0012520B /* AboutRequests.swift */,
+				77E0A4412AD5B4DD000C8346 /* CreateRequest.swift */,
+				77A26EDE2AC08F520012520B /* SignInWSO.swift */,
+				77A26EE02AC0A3390012520B /* Registration.swift */,
+				77D1806B2AC885EC00226CBE /* Login.swift */,
+				77D1806D2AC8890A00226CBE /* Search.swift */,
+				77D180712ACC871100226CBE /* SpecialiststList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		77A26EE22AC410040012520B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				77A26EE72AC412BD0012520B /* Requester.swift */,
+				77D180622AC4913300226CBE /* Endpoint.swift */,
+				77D180642AC4918900226CBE /* Errors.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		77D1805A2AC481DB00226CBE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				77A26EE32AC410340012520B /* User.swift */,
+				77E0A43F2AD3A5B9000C8346 /* Refs.swift */,
+				77A26EE52AC4113D0012520B /* Tokens.swift */,
+				77E0A43D2AD07D3A000C8346 /* Step.swift */,
+				77D1805B2AC4820100226CBE /* AuthBody.swift */,
+				77D180662AC569B500226CBE /* CaseInfo.swift */,
+				77D1806F2ACC7ECF00226CBE /* Specialist.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		77D1805D2AC4889B00226CBE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				77D1805E2AC488BA00226CBE /* UserDefaultsWorker.swift */,
+				77D180602AC4892B00226CBE /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		77D180682AC5D55E00226CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				77D180692AC5D57900226CBE /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		77D180772ACD525000226CBE /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				77D180752ACD51CB00226CBE /* ButtonsStyles.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		77A26EC32AC033220012520B /* Zan-Lab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77A26ED22AC033260012520B /* Build configuration list for PBXNativeTarget "Zan-Lab" */;
+			buildPhases = (
+				77A26EC02AC033220012520B /* Sources */,
+				77A26EC12AC033220012520B /* Frameworks */,
+				77A26EC22AC033220012520B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Zan-Lab";
+			productName = "Zan-Lab";
+			productReference = 77A26EC42AC033220012520B /* Zan-Lab.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		77A26EBC2AC033220012520B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					77A26EC32AC033220012520B = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 77A26EBF2AC033220012520B /* Build configuration list for PBXProject "Zan-Lab" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 77A26EBB2AC033220012520B;
+			productRefGroup = 77A26EC52AC033220012520B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				77A26EC32AC033220012520B /* Zan-Lab */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		77A26EC22AC033220012520B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77A26ECF2AC033260012520B /* Preview Assets.xcassets in Resources */,
+				77A26ECC2AC033260012520B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		77A26EC02AC033220012520B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77D180742ACD1E0500226CBE /* ImageView.swift in Sources */,
+				77C0F4E62ACEAD450023989C /* Profile.swift in Sources */,
+				77D180632AC4913300226CBE /* Endpoint.swift in Sources */,
+				77D180672AC569B500226CBE /* CaseInfo.swift in Sources */,
+				77D180652AC4918900226CBE /* Errors.swift in Sources */,
+				77A26EDD2AC07D7E0012520B /* AboutRequests.swift in Sources */,
+				77D1805C2AC4820100226CBE /* AuthBody.swift in Sources */,
+				77C0F4E82AD00F820023989C /* ProfileView.swift in Sources */,
+				77A26EE42AC410340012520B /* User.swift in Sources */,
+				77A26EDB2AC07CC80012520B /* TopSituations.swift in Sources */,
+				77D1805F2AC488BA00226CBE /* UserDefaultsWorker.swift in Sources */,
+				77E0A43E2AD07D3A000C8346 /* Step.swift in Sources */,
+				77D180702ACC7ECF00226CBE /* Specialist.swift in Sources */,
+				77D1806A2AC5D57900226CBE /* MainViewModel.swift in Sources */,
+				77A26EE82AC412BD0012520B /* Requester.swift in Sources */,
+				77A26EE12AC0A3390012520B /* Registration.swift in Sources */,
+				77C0F4EA2AD011740023989C /* ProfileEdit.swift in Sources */,
+				77E0A4422AD5B4DD000C8346 /* CreateRequest.swift in Sources */,
+				77A26ECA2AC033220012520B /* ContentView.swift in Sources */,
+				77D1806E2AC8890A00226CBE /* Search.swift in Sources */,
+				77D180612AC4892B00226CBE /* Extensions.swift in Sources */,
+				77A26ED92AC07BD40012520B /* TopMenu.swift in Sources */,
+				77E0A4402AD3A5B9000C8346 /* Refs.swift in Sources */,
+				77D180722ACC871100226CBE /* SpecialiststList.swift in Sources */,
+				77D180762ACD51CB00226CBE /* ButtonsStyles.swift in Sources */,
+				77A26EC82AC033220012520B /* Zan_LabApp.swift in Sources */,
+				77D1806C2AC885EC00226CBE /* Login.swift in Sources */,
+				77A26EDF2AC08F520012520B /* SignInWSO.swift in Sources */,
+				77A26EE62AC4113D0012520B /* Tokens.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		77A26ED02AC033260012520B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		77A26ED12AC033260012520B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		77A26ED32AC033260012520B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Zan-Lab/Preview Content\"";
+				DEVELOPMENT_TEAM = 342774267N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "ZAN-LAB";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apcode.Zan-Lab";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		77A26ED42AC033260012520B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Zan-Lab/Preview Content\"";
+				DEVELOPMENT_TEAM = 342774267N;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "ZAN-LAB";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apcode.Zan-Lab";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		77A26EBF2AC033220012520B /* Build configuration list for PBXProject "Zan-Lab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77A26ED02AC033260012520B /* Debug */,
+				77A26ED12AC033260012520B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77A26ED22AC033260012520B /* Build configuration list for PBXNativeTarget "Zan-Lab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77A26ED32AC033260012520B /* Debug */,
+				77A26ED42AC033260012520B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 77A26EBC2AC033220012520B /* Project object */;
+}
