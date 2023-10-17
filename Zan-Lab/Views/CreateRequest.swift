@@ -98,10 +98,10 @@ struct CreateRequest: View {
                     DatePicker("Дата происшествия", selection: $selectedDate, displayedComponents: .date)
                             .labelsHidden()
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color("zlGray"))
-                .cornerRadius(12)
+//                .frame(maxWidth: .infinity)
+//                .padding()
+//                .background(Color("zlGray"))
+//                .cornerRadius(12)
                 
                 Divider()
                 
