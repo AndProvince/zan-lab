@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct Login: View {
     @EnvironmentObject var mainVM: MainViewModel
@@ -31,6 +32,13 @@ struct Login: View {
                     Image(systemName: "phone")
                     TextField("Телефон", text: $telephone)
                         .keyboardType(.phonePad)
+                        .onChange(of: telephone, perform: { [oldValue = telephone] newValue in
+                            // 9 digits and 9 symbols in mask = 18
+                            if newValue.count > 18 {
+                                self.telephone = oldValue
+                            }
+                            telephone = FormatByMask(with: "+X (XXX) XXX-XX-XX", phone: telephone)
+                        })
                 }
                 .padding()
                 .overlay(RoundedRectangle(cornerRadius: 10)
@@ -56,10 +64,17 @@ struct Login: View {
                 HStack{
                     Image(systemName: "key")
                     Group {
+                        
                         if isSecured {
                             SecureField("Введите пароль", text: $password)
+                                .onReceive(Just(password), perform: { newValue in
+                                    self.password = SaveRomanLettersAndDigits(word: newValue)
+                                })
                         } else {
                             TextField("Введите пароль", text: $password)
+                                .onReceive(Just(password), perform: { newValue in
+                                    self.password = SaveRomanLettersAndDigits(word: newValue)
+                                })
                         }
                     }
                     // Кнопка переключения видимости данных в поле ввода пароля
