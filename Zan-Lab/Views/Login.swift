@@ -18,18 +18,17 @@ struct Login: View {
     @State private var isSecured: Bool = true
     
     var body: some View {
-        VStack {
-            VStack (alignment: .leading, spacing: 2){
-                // Поле ввода телефона
-                Text("Телефон")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(telephone.isEmpty ? 0 : 1)
-                    .offset(y: telephone.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                HStack{
-                    Image(systemName: "phone")
+        VStack(alignment: .leading, spacing: 24){
+            
+            HStack(alignment: .center, spacing: 12){
+                Image(systemName: "phone")
+                ZStack(alignment: .leading) {
+                    Text("Телефон")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .opacity(telephone.isEmpty ? 0 : 1)
+                        .offset(y: telephone.isEmpty ? 0 : -20)
+
                     TextField("Телефон", text: $telephone)
                         .keyboardType(.phonePad)
                         .onChange(of: telephone, perform: { [oldValue = telephone] newValue in
@@ -40,82 +39,80 @@ struct Login: View {
                             telephone = FormatByMask(with: "+X (XXX) XXX-XX-XX", phone: telephone)
                         })
                 }
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.black, lineWidth: 1)
-                    .shadow(radius: 20))
-                .padding(.horizontal)
+                .padding(.vertical, 10)
             }
-            .padding(.vertical)
+            .padding(12)
+            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .topLeading)
+            .background(Color("Gray_bg"))
+            .cornerRadius(12)
+            .overlay(RoundedRectangle(cornerRadius: 12)
+                .inset(by: 0.5)
+                .stroke(Color("Gray_elements"), lineWidth: 1)
+            )
             .animation(.default, value: UUID())
             
-            //            Text("По номеру телефона")
-            //                .padding(.horizontal)
             
-            VStack (alignment: .leading, spacing: 2){
-                // Поле ввода пароля
-                Text("Введите пароль")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(password.isEmpty ? 0 : 1)
-                    .offset(y: password.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                HStack{
-                    Image(systemName: "key")
+            // Поле ввода пароля
+            HStack(alignment: .center, spacing: 12){
+                Image(systemName: "key")
+                ZStack(alignment: .leading) {
+                    Text("Введите пароль")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .opacity(password.isEmpty ? 0 : 1)
+                        .offset(y: password.isEmpty ? 0 : -20)
+
                     Group {
-                        
                         if isSecured {
                             SecureField("Введите пароль", text: $password)
-                                .onReceive(Just(password), perform: { newValue in
-                                    self.password = SaveRomanLettersAndDigits(word: newValue)
-                                })
                         } else {
                             TextField("Введите пароль", text: $password)
-                                .onReceive(Just(password), perform: { newValue in
-                                    self.password = SaveRomanLettersAndDigits(word: newValue)
-                                })
                         }
                     }
-                    // Кнопка переключения видимости данных в поле ввода пароля
-                    Button {
-                        isSecured.toggle()
-                    } label: {
-                        Image(systemName: self.isSecured ? "eye" : "eye.slash")
-                            .accentColor(.gray)
-                    }
-                    
-                    
                 }
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.black, lineWidth: 1)
-                    .shadow(radius: 20))
-                .padding(.horizontal)
+                .padding(.vertical, 10)
                 
-                Button("Забыли пароль?") {}
-                    .padding(.horizontal)
-                
-                Spacer()
-                
-                Button(action: {
-                    mainVM.doLogin(login: telephone, passord: password)
-                }, label: {
-                    Text("Войти")
-                        .font(.title2)
-                        .frame(minWidth: 100, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.gray)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.blue, lineWidth: 2)
-                            .shadow(radius: 20))
-                })
-                .cornerRadius(10)
-                .padding()
+                // Кнопка переключения видимости данных в поле ввода пароля
+                Button {
+                    isSecured.toggle()
+                } label: {
+                    Image(systemName: self.isSecured ? "eye" : "eye.slash")
+                        .accentColor(.gray)
+                }
             }
-            //.padding(.vertical)
+            .padding(12)
+            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .topLeading)
+            .background(Color("Gray_bg"))
+            .cornerRadius(12)
+            .overlay(RoundedRectangle(cornerRadius: 12)
+                .inset(by: 0.5)
+                .stroke(Color("Gray_elements"), lineWidth: 1)
+            )
             .animation(.default, value: UUID())
+                
+            Button("Забыли пароль?") {}
+                .padding(.horizontal)
+            
+            Spacer()
+                
+            Button(action: {
+                mainVM.doLogin(login: telephone, passord: password)
+            }, label: {
+                Text("Войти")
+                    .font(.title2)
+                    .frame(minWidth: 100, maxWidth: .infinity)
+                    .padding()
+                    .foregroundColor(.gray)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.blue, lineWidth: 2)
+                        .shadow(radius: 20))
+            })
+            .cornerRadius(10)
+            .padding()
+
         }
+        .padding(.horizontal, 12)
+        .padding(.top, 12)
         .navigationTitle("Вход в систему")
     }
 }

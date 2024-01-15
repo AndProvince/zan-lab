@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct Registration: View {
     
@@ -70,8 +71,14 @@ struct Registration: View {
                             Group {
                                 if isSecured {
                                     SecureField("Придумайте пароль", text: $password)
+                                        .onReceive(Just(password), perform: { newValue in
+                                            self.password = SaveRomanLettersAndDigits(word: newValue)
+                                        })
                                 } else {
                                     TextField("Придумайте пароль", text: $password)
+                                        .onReceive(Just(password), perform: { newValue in
+                                            self.password = SaveRomanLettersAndDigits(word: newValue)
+                                        })
                                 }
                             }
                         }
