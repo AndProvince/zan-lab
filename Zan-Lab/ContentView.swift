@@ -28,7 +28,7 @@ struct ContentView: View {
                         TopSituations()
                         AboutRequests(tabSelection: $tabSelection)
                     }
-                    .background(Color("zlGray"))
+                    .background(Color("Gray_bg"))
                     .tabItem(){
                         Image(systemName: "house")
                         Text("Главная")

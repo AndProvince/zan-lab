@@ -26,44 +26,47 @@ struct Registration: View {
                 Login()
             }
         } else {
-            GeometryReader {geo in
-                ScrollView {
+            ScrollView {
+                
+                VStack(alignment: .leading, spacing: 24) {
                     
-                    VStack(alignment: .leading, spacing: 2) {
-                        // Поле ввода телефона
-                        Text("Телефон")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .opacity(telephone.isEmpty ? 0 : 1)
-                            .offset(y: telephone.isEmpty ? 20 : 0)
-                            .padding(.horizontal)
-                        
-                        HStack{
-                            Image(systemName: "phone")
+                    // Поле ввода телефона
+                    HStack(alignment: .center, spacing: 12){
+                        Image(systemName: "phone")
+                        ZStack(alignment: .leading) {
+                            Text("Телефон")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .opacity(telephone.isEmpty ? 0 : 1)
+                                .offset(y: telephone.isEmpty ? 0 : -20)
+
                             TextField("Телефон", text: $telephone)
                                 .keyboardType(.phonePad)
                         }
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black, lineWidth: 1)
-                            .shadow(radius: 20))
-                        //.padding()
-                        .disabled(mainVM.registerPending)
+                        .padding(.vertical, 10)
                     }
-                    .padding(.horizontal)
+                    .padding(12)
+                    .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .topLeading)
+                    .background(Color("Gray_bg"))
+                    .cornerRadius(12)
+                    .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                    )
+                    .disabled(mainVM.registerPending)
                     .animation(.default, value: UUID())
                     
+                    
                     // Поле ввода пароля
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Придумайте пароль")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .opacity(password.isEmpty ? 0 : 1)
-                            .offset(y: password.isEmpty ? 20 : 0)
-                            .padding(.horizontal)
-                        
-                        HStack{
-                            Image(systemName: "key")
+                    HStack(alignment: .center, spacing: 12){
+                        Image(systemName: "key")
+                        ZStack(alignment: .leading) {
+                            Text("Придумайте пароль")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .opacity(password.isEmpty ? 0 : 1)
+                                .offset(y: password.isEmpty ? 0 : -20)
+
                             Group {
                                 if isSecured {
                                     SecureField("Придумайте пароль", text: $password)
@@ -71,107 +74,128 @@ struct Registration: View {
                                     TextField("Придумайте пароль", text: $password)
                                 }
                             }
-                            // Кнопка переключения видимости данных в поле ввода пароля
-                            Button {
-                                isSecured.toggle()
-                            } label: {
-                                Image(systemName: self.isSecured ? "eye" : "eye.slash")
-                                    .accentColor(.gray)
-                            }
                         }
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black, lineWidth: 1)
-                            .shadow(radius: 20))
-                        //.padding([.top, .horizontal])
-                        .disabled(mainVM.registerPending)
-                    
-                    
-                        Text("Не менее 6 знаков, включать минимум одну заглавную и одну строчную буквы, цифры и специальные символы")
-                            .font(.callout)
+                        .padding(.vertical, 10)
+                        
+                        // Кнопка переключения видимости данных в поле ввода пароля
+                        Button {
+                            isSecured.toggle()
+                        } label: {
+                            Image(systemName: self.isSecured ? "eye" : "eye.slash")
+                                .accentColor(.gray)
+                        }
                     }
-                    //.frame(maxWidth: geo.size.width)
-                    .padding(.horizontal)
+                    .padding(12)
+                    .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .topLeading)
+                    .background(Color("Gray_bg"))
+                    .cornerRadius(12)
+                    .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                    )
+                    .disabled(mainVM.registerPending)
                     .animation(.default, value: UUID())
+                        
+                    Text("Не менее 6 знаков, включать минимум одну заглавную и одну строчную буквы, цифры и специальные символы")
+                        .font(.callout)
+                        .foregroundColor(Color(.gray))
                     
+                }
+                .padding(.horizontal, 12)
+                .padding(.top, 12)
+                
+                VStack(alignment: .leading, spacing: 24) {
                     
                     // Поле ввода почты
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Электронная почта")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .opacity(email.isEmpty ? 0 : 1)
-                            .offset(y: email.isEmpty ? 20 : 0)
-                            .padding(.horizontal)
-                        
-                        HStack{
-                            Image(systemName: "envelope")
+                    HStack(alignment: .center, spacing: 12){
+                        Image(systemName: "envelope")
+                        ZStack(alignment: .leading) {
+                            Text("Электронная почта")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .opacity(email.isEmpty ? 0 : 1)
+                                .offset(y: email.isEmpty ? 0 : -20)
+                            
                             TextField("Электронная почта", text: $email)
                                 .keyboardType(.emailAddress)
                         }
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black, lineWidth: 1)
-                            .shadow(radius: 20))
-                        //.padding([.top, .horizontal])
-                        .disabled(mainVM.registerPending)
-                    
-                        Text("Вам необходимо указать свой адрес электронной почты для использования в качестве альтернативного способа входа и для восстановления пароля")
-                            .font(.callout)
+                        .padding(.vertical, 10)
                     }
-                    //.frame(maxWidth: geo.size.width)
-                    .padding(.horizontal)
+                    .padding(12)
+                    .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .topLeading)
+                    .background(Color("Gray_bg"))
+                    .cornerRadius(12)
+                    .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                    )
+                    .disabled(mainVM.registerPending)
                     .animation(.default, value: UUID())
-                        
-                    
-                    VStack {
-                        Text("Используя сервис Zan-Lab и продолжая регистрацию вы даете согаласие на сбор и обработку Ваших данных и соглашаетесь с условиями пользовательского соглашения")
-                    }
-                    .frame(maxWidth: geo.size.width)
-                    .padding()
-                    
-                    Spacer()
-                    
+                
+                    Text("Вам необходимо указать свой адрес электронной почты для использования в качестве альтернативного способа входа и для восстановления пароля")
+                        .font(.callout)
+                        .foregroundColor(Color(.gray))
+
+                    Text("Используя сервис Zan-Lab и продолжая регистрацию вы даете согаласие на сбор и обработку Ваших данных и соглашаетесь с условиями пользовательского соглашения")
+                }
+                .padding(.horizontal, 12)
+                
+                Spacer()
+                
+                VStack(alignment: .leading, spacing: 24) {
                     if mainVM.registerPending {
                         // Поле ввода OTP
-                        VStack{
-                            TextField("Введите код из SMS", text: $otpCode)
-                                .keyboardType(.numberPad)
+                        HStack(alignment: .center, spacing: 12){
+                            ZStack(alignment: .leading) {
+                                Text("Введите код из SMS")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                                    .opacity(otpCode.isEmpty ? 0 : 1)
+                                    .offset(y: otpCode.isEmpty ? 0 : -20)
+                                
+                                TextField("Введите код из SMS", text: $otpCode)
+                                    .keyboardType(.numberPad)
+                            }
+                            .padding(.vertical,  10)
                         }
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black, lineWidth: 1)
-                            .shadow(radius: 20))
-                        .padding()
+                        .padding(12)
+                        .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .topLeading)
+                        .background(Color("Gray_bg"))
+                        .cornerRadius(12)
+                        .overlay(RoundedRectangle(cornerRadius: 12)
+                            .inset(by: 0.5)
+                            .stroke(Color("Gray_elements"), lineWidth: 1)
+                        )
+                        .animation(.default, value: UUID())
                     }
                     
-                    VStack {
-                        Button(action: {
-                            if mainVM.registerPending {
-                                mainVM.register(login: self.telephone, password: self.password, otpCode: self.otpCode)
-                            } else
-                            {
-                                mainVM.sendOtp(login: self.telephone)
-                            }
-                        }, label: {
-                            Text(mainVM.registerPending ? "Зарегистрированться" : "Получить SMS код")
-                                .font(.title2)
-                                .frame(minWidth: 100, maxWidth: geo.size.width)
-                                .padding()
-                                .foregroundColor(.gray)
-                                .overlay(RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 2)
-                                    .shadow(radius: 20))
-                        })
-                        .cornerRadius(10)
-                        .padding()
-                    }
+                    Button(action: {
+                        if mainVM.registerPending {
+                            mainVM.register(login: self.telephone, password: self.password, otpCode: self.otpCode)
+                        } else
+                        {
+                            mainVM.sendOtp(login: self.telephone)
+                        }
+                    }, label: {
+                        Text(mainVM.registerPending ? "Зарегистрированться" : "Получить SMS код")
+                            .font(.title2)
+                            .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56, alignment: .center)
+                            .padding(.horizontal)
+                            .foregroundColor(.gray)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                                .shadow(radius: 20))
+                    })
+                    .cornerRadius(10)
+                    .padding(.vertical)
                 }
-                .navigationTitle("Регистрация")
-                .onAppear() {
-                    if mainVM.registerPending {
-                        mainVM.registerPending = false
-                    }
+                .padding(.horizontal, 12)
+                
+            }
+            .navigationTitle("Регистрация")
+            .onAppear() {
+                if mainVM.registerPending {
+                    mainVM.registerPending = false
                 }
             }
         }
