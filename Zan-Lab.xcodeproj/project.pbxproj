@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55AEBDE12B5623DA000B273D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AEBDE02B5623DA000B273D /* Utils.swift */; };
 		77A26EC82AC033220012520B /* Zan_LabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EC72AC033220012520B /* Zan_LabApp.swift */; };
 		77A26ECA2AC033220012520B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EC92AC033220012520B /* ContentView.swift */; };
 		77A26ECC2AC033260012520B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77A26ECB2AC033260012520B /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55AEBDE02B5623DA000B273D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		77A26EC42AC033220012520B /* Zan-Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zan-Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A26EC72AC033220012520B /* Zan_LabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zan_LabApp.swift; sourceTree = "<group>"; };
 		77A26EC92AC033220012520B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				77D1805E2AC488BA00226CBE /* UserDefaultsWorker.swift */,
 				77D180602AC4892B00226CBE /* Extensions.swift */,
+				55AEBDE02B5623DA000B273D /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				77D180702ACC7ECF00226CBE /* Specialist.swift in Sources */,
 				77D1806A2AC5D57900226CBE /* MainViewModel.swift in Sources */,
 				77A26EE82AC412BD0012520B /* Requester.swift in Sources */,
+				55AEBDE12B5623DA000B273D /* Utils.swift in Sources */,
 				77A26EE12AC0A3390012520B /* Registration.swift in Sources */,
 				77C0F4EA2AD011740023989C /* ProfileEdit.swift in Sources */,
 				77E0A4422AD5B4DD000C8346 /* CreateRequest.swift in Sources */,

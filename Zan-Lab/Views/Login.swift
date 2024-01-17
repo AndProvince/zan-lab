@@ -17,6 +17,9 @@ struct Login: View {
     // Флаг скрыть-показать данные в поле ввода пароля
     @State private var isSecured: Bool = true
     
+    
+    private let mask = "+X (XXX) XXX-XX-XX"
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 24){
             
@@ -36,7 +39,7 @@ struct Login: View {
                             if newValue.count > 18 {
                                 self.telephone = oldValue
                             }
-                            telephone = FormatByMask(with: "+X (XXX) XXX-XX-XX", phone: telephone)
+                            telephone = FormatByMask(with: mask, phone: telephone)
                         })
                 }
                 .padding(.vertical, 10)
@@ -89,7 +92,7 @@ struct Login: View {
                 .stroke(Color("Gray_elements"), lineWidth: 1)
             )
             .animation(.default, value: UUID())
-                
+        
             Button("Забыли пароль?") {}
                 .padding(.horizontal)
             

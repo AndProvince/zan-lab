@@ -20,6 +20,15 @@ struct Registration: View {
     // Флаг скрыть-показать данные в поле ввода пароля
     @State private var isSecured: Bool = true
     
+    // Флаг ошибки при вводе пароля
+    @State private var isPasswordError: Bool = false
+    
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertText: String = ""
+    
+    private let mask = "+X (XXX) XXX-XX-XX"
+    
     var body: some View {
         // Проверка требуется ли форма входа
         if mainVM.loginPending {
@@ -43,6 +52,13 @@ struct Registration: View {
 
                             TextField("Телефон", text: $telephone)
                                 .keyboardType(.phonePad)
+                                .onChange(of: telephone, perform: { [oldValue = telephone] newValue in
+                                    // 9 digits and 9 symbols in mask = 18
+                                    if newValue.count > 18 {
+                                        self.telephone = oldValue
+                                    }
+                                    telephone = FormatByMask(with: mask, phone: telephone)
+                                })
                         }
                         .padding(.vertical, 10)
                     }
@@ -98,7 +114,7 @@ struct Registration: View {
                     .cornerRadius(12)
                     .overlay(RoundedRectangle(cornerRadius: 12)
                         .inset(by: 0.5)
-                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                        .stroke(isPasswordError ? .red : Color("Gray_elements"), lineWidth: 1)
                     )
                     .disabled(mainVM.registerPending)
                     .animation(.default, value: UUID())
@@ -177,11 +193,39 @@ struct Registration: View {
                     }
                     
                     Button(action: {
+                        // Проверка на наличие цифр в пароле
+                        if IsNeedNumber(word: self.password){
+                            self.alertTitle = "Ошибка ввода пароля"
+                            self.alertText = "Не менее 6 знаков на латинице, включать минимум одну заглавную и одну строчную буквы, цифры и специальные символы"
+                            
+                            self.isPasswordError = true
+                            self.showAlert.toggle()
+                        }
+                        // Проверка на наличие заглавных букв
+                        else if IsNeedUpper(word: self.password){
+                            self.alertTitle = "Ошибка ввода пароля"
+                            self.alertText = "Не менее 6 знаков на латинице, включать минимум одну заглавную и одну строчную буквы, цифры и специальные символы"
+                            
+                            self.isPasswordError = true
+                            self.showAlert.toggle()
+                        }
+                        else if IsNeedLower(word: self.password){
+                            self.alertTitle = "Ошибка ввода пароля"
+                            self.alertText = "Не менее 6 знаков на латинице, включать минимум одну заглавную и одну строчную буквы, цифры и специальные символы"
+                            
+                            self.isPasswordError = true
+                            self.showAlert.toggle()
+                        }
+                        else {
+                            self.isPasswordError = false
+                        }
+                        
+                        let login = UnFormatByMask(with: mask, phone: self.telephone)
                         if mainVM.registerPending {
-                            mainVM.register(login: self.telephone, password: self.password, otpCode: self.otpCode)
+                            mainVM.register(login: login, password: self.password, otpCode: self.otpCode)
                         } else
                         {
-                            mainVM.sendOtp(login: self.telephone)
+                            mainVM.sendOtp(login: login)
                         }
                     }, label: {
                         Text(mainVM.registerPending ? "Зарегистрированться" : "Получить SMS код")
@@ -195,6 +239,9 @@ struct Registration: View {
                     })
                     .cornerRadius(10)
                     .padding(.vertical)
+                    .alert(isPresented: $showAlert){
+                        Alert(title: Text(alertTitle), message: Text(alertText), dismissButton: .default(Text("Ok")))
+                    }
                 }
                 .padding(.horizontal, 12)
                 
