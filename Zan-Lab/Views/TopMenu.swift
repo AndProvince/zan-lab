@@ -24,12 +24,16 @@ struct TopMenu: View {
                            label: {
                         Image(systemName: "person")
                         Text("Личный кабинет")
+                            .font(Font.custom("Open Sans", size: 16))
+                            .kerning(0.16)
                     })
                     
                     Button(action: { },
                            label: {
                         Image(systemName: "text.bubble")
                         Text("Мои обращения")
+                            .font(Font.custom("Open Sans", size: 16))
+                            .kerning(0.16)
                     })
                     
                     Button(action: {
@@ -39,12 +43,16 @@ struct TopMenu: View {
                            label: {
                         Image(systemName: "pencil")
                         Text("Редактировать профиль")
+                            .font(Font.custom("Open Sans", size: 16))
+                            .kerning(0.16)
                     })
                     
                     Button(action: { },
                            label: {
                         Image(systemName: "person.badge.shield.checkmark")
                         Text("Регистрация специалиста")
+                            .font(Font.custom("Open Sans", size: 16))
+                            .kerning(0.16)
                     })
                     
                     Divider()
@@ -52,6 +60,8 @@ struct TopMenu: View {
                     Button(action: { mainVM.logout() },
                            label: {
                         Text("Выход")
+                            .font(Font.custom("Open Sans", size: 16))
+                            .kerning(0.16)
                     })
                     
                 } label: {

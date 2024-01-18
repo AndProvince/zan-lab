@@ -32,7 +32,10 @@ struct TopSituations: View {
     var body: some View {
         VStack(alignment: .leading){
             Text("Частые ситуации")
-                .font(.largeTitle)
+                .font(
+                Font.custom("Montserrat", size: 24)
+                .weight(.bold)
+                )
                 .padding()
             
             withAnimation {
@@ -45,6 +48,10 @@ struct TopSituations: View {
                                         .frame(width: 18, height: 18)
                                         .padding(.leading)
                                     Text(mainVM.topCases[row*3+col].caseInfo.caseNameRu)
+                                        .font(
+                                        Font.custom("Montserrat", size: 14)
+                                        .weight(.semibold)
+                                        )
                                 }
                                 .frame(width: 264, height: 83, alignment: .leading)
                             }
@@ -66,7 +73,7 @@ struct TopSituations: View {
                 }
             }
         }
-        .background(Color("zlGray"))
+        .background(Color("Gray_bg"))
     }
 }
 

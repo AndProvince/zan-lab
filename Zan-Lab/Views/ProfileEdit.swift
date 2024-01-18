@@ -229,19 +229,19 @@ struct ProfileEdit: View {
             }
             .animation(.default, value: UUID())
             
-            Divider()
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 24) {
+                Divider()
+                
                 Button(action: {
                     // to do
                 }, label: {
                     Text("Изменить пароль")
-                        .padding(.horizontal)
                 })
                 
+                Divider()
             }
-            
-            Divider()
+        
             
             VStack(alignment: .leading, spacing: 12){
                 HStack(alignment: .center){
@@ -271,7 +271,7 @@ struct ProfileEdit: View {
                 mainVM.user?.about = self.about
                 mainVM.putUser()
                 mainVM.showEditProfile.toggle()
-            },label: {
+            }, label: {
                     Text("Сохранить")
                         .font(.title2)
                         .frame(minWidth: 100, maxWidth: .infinity)
