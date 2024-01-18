@@ -8,8 +8,10 @@
 import Foundation
 
 struct ErrorResponse: Codable {
-    let code: Int
+    let timestamp: String
+    let status: Int
     let message: String
+    let path: String
     
     func isAuth() -> Bool {
         return Errors.isAuthError(err: message)
@@ -135,6 +137,7 @@ class Requester {
     // проверяет нужно ли обновлять токены перед запросом
     // или просто выполнить запрос
     func request<T: Decodable>(request: URLRequest, onResult: @escaping (Result<T>) -> Void) {
+        //print("Need reAuth - \(needReAuth)")
         if (needReAuth && !refreshToken.token.isEmpty) {
             authAndDoRequest(request: request, onResult: onResult)
         } else {
@@ -156,14 +159,14 @@ class Requester {
             guard let httpResponse = response as? HTTPURLResponse else {
                 // не должно выполняться никуда
                 DispatchQueue.main.async {
-                    onResult(.authError(ErrorResponse(code: 0, message: Errors.ERR_CONVERTING_TO_HTTP_RESPONSE)))
+                    onResult(.authError(ErrorResponse(timestamp: "", status: 0, message: Errors.ERR_CONVERTING_TO_HTTP_RESPONSE, path: "")))
                 }
                 return
             }
             guard let data = data else {
                 // не должно выполняться никогда
                 DispatchQueue.main.async {
-                    onResult(.authError(ErrorResponse(code: httpResponse.statusCode, message: Errors.ERR_NIL_BODY)))
+                    onResult(.authError(ErrorResponse(timestamp: "", status: httpResponse.statusCode, message: Errors.ERR_NIL_BODY, path: "")))
                 }
                 return
             }
@@ -177,7 +180,7 @@ class Requester {
                     return
                 } catch {
                     DispatchQueue.main.async {
-                        onResult(.authError(ErrorResponse(code: 0, message: Errors.ERR_PARSE_RESPONSE)))
+                        onResult(.authError(ErrorResponse(timestamp: "", status: 0, message: Errors.ERR_PARSE_RESPONSE, path: "")))
                     }
                     return
                 }
@@ -190,7 +193,7 @@ class Requester {
                     return
                 } catch {
                     DispatchQueue.main.async {
-                        onResult(.authError(ErrorResponse(code: 0, message: error.localizedDescription)))
+                        onResult(.authError(ErrorResponse(timestamp: "", status: 0, message: error.localizedDescription, path: "")))
                     }
                     return
                 }
@@ -211,14 +214,14 @@ class Requester {
             guard let httpResponse = response as? HTTPURLResponse else {
                 // не должно выполняться никуда
                 DispatchQueue.main.async {
-                    onResult(.authError(ErrorResponse(code: 0, message: Errors.ERR_CONVERTING_TO_HTTP_RESPONSE)))
+                    onResult(.authError(ErrorResponse(timestamp: "", status: 0, message: Errors.ERR_CONVERTING_TO_HTTP_RESPONSE, path: "")))
                 }
                 return
             }
             guard let data = data else {
                 // не должно выполняться никогда
                 DispatchQueue.main.async {
-                    onResult(.authError(ErrorResponse(code: httpResponse.statusCode, message: Errors.ERR_NIL_BODY)))
+                    onResult(.authError(ErrorResponse(timestamp: "", status: httpResponse.statusCode, message: Errors.ERR_NIL_BODY, path: "")))
                 }
                 return
             }
@@ -262,7 +265,7 @@ class Requester {
                 return .serverError(errorResponse)
             }
         } catch {
-            return .serverError(ErrorResponse(code: 0, message: Errors.ERR_PARSE_ERROR_RESPONSE))
+            return .serverError(ErrorResponse(timestamp: "", status: 0, message: Errors.ERR_PARSE_ERROR_RESPONSE, path: ""))
         }
     }
     

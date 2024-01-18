@@ -20,173 +20,216 @@ struct ProfileEdit: View {
     @State private var about = ""
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 24) {
             Text("Личная информация")
-                .font(.headline)
-                .padding(.vertical)
+                .font(
+                Font.custom("Montserrat", size: 20)
+                .weight(.bold)
+                )
+                .padding(.bottom, 12)
             
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Фамилия")
-                    .font(.caption)
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center){
+                    ZStack(alignment: .leading) {
+                        TextField("Фамилия", text: $lastName)
+                            .padding(12)
+                            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
+                            .background(Color("Gray_bg"))
+                            .cornerRadius(12)
+                            .overlay(RoundedRectangle(cornerRadius: 12)
+                                    .inset(by: 0.5)
+                                    .stroke(Color("Gray_elements"), lineWidth: 1)
+                            )
+                        
+                        Text("Фамилия")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(lastName.isEmpty ? 0 : 1)
+                            .offset(x: 10, y: lastName.isEmpty ? 0 : -20)
+                    }
+                }
+                
+                HStack(alignment: .center){
+                    ZStack(alignment: .leading) {
+                        TextField("Имя и Отчетство", text: $firstName)
+                            .padding(12)
+                            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
+                            .background(Color("Gray_bg"))
+                            .cornerRadius(12)
+                            .overlay(RoundedRectangle(cornerRadius: 12)
+                                    .inset(by: 0.5)
+                                    .stroke(Color("Gray_elements"), lineWidth: 1)
+                            )
+                        
+                        Text("Имя и Отчетство")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(firstName.isEmpty ? 0 : 1)
+                            .offset(x: 10, y: firstName.isEmpty ? 0 : -20)
+                    }
+                }
+                
+                HStack {
+                    Picker("Населенный пункт", selection: $selectedLocation) {
+                        ForEach(0 ..< mainVM.allLocations.count) { index in
+                            Text("\(mainVM.allLocations[index].valueRu)")
+                                .foregroundColor(Color.black)
+                        }
+                    }
+                    .pickerStyle(.navigationLink)
                     .foregroundColor(.gray)
-                    .opacity(lastName.isEmpty ? 0 : 1)
-                    .offset(y: lastName.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                TextField("Фамилия", text: $lastName)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color("zlGray"))
-                    .cornerRadius(12)
-
-                Text("Имя и Отчетство")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(firstName.isEmpty ? 0 : 1)
-                    .offset(y: firstName.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                TextField("Имя и Отчетство", text: $firstName)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color("zlGray"))
-                    .cornerRadius(12)
-                
-                Divider()
-                    .padding(.vertical)
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
+                .background(Color("Gray_bg"))
+                .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                )
                 
             }
             .animation(.default, value: UUID())
-                
-//            Text(lastName.isEmpty ? " " : "Населенный пункт")
-//                .font(.subheadline)
-//                .foregroundColor(.gray)
-//                .padding(.horizontal)
-            
-            HStack {
-                Picker("Населенный пункт", selection: $selectedLocation) {
-                    ForEach(0 ..< mainVM.allLocations.count) { index in
-                        Text("\(mainVM.allLocations[index].valueRu)")
-                            .foregroundColor(Color.black)
-                    }
-                }
-                .pickerStyle(.navigationLink)
-                .foregroundColor(.gray)
-            }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color("zlGray"))
-            .cornerRadius(12)
             
             Divider()
-                .padding(.vertical)
             
             // контакты - номера телефонов
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Номер телефона")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(mobile.isEmpty ? 0 : 1)
-                    .offset(y: mobile.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
+            VStack(alignment: .leading, spacing: 12) {
                 
-                HStack{
+                HStack(alignment: .center, spacing: 12){
                     Image(systemName: "phone")
-                    TextField("Номер телефона", text: $mobile)
+                    ZStack(alignment: .leading) {
+                        TextField("Номер телефона", text: $mobile)
+                        
+                        Text("Номер телефона")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(mobile.isEmpty ? 0 : 1)
+                            .offset(y: mobile.isEmpty ? 0 : -20)
+                    }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
+                .padding(12)
+                .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
                 .foregroundColor(.gray)
-                .background(Color("zlGray"))
+                .background(Color("Gray_bg"))
                 .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                )
                 .disabled(true)
                 
                 Button(action: {
                     // to do
                 }, label: {
                     Text("Изменить номер телефона")
-                        .padding([.bottom, .horizontal])
                 })
-
-                Text("Контактный номер")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(contactPhone.isEmpty ? 0 : 1)
-                    .offset(y: contactPhone.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
                 
-                HStack{
+                
+                HStack(alignment: .center, spacing: 12){
                     Image(systemName: "phone")
-                    TextField("Контактный номер", text: $contactPhone)
-                        .keyboardType(.phonePad)
+                    ZStack(alignment: .leading) {
+                        TextField("Номер телефона", text: $contactPhone)
+                            .keyboardType(.phonePad)
+                        
+                        Text("Контактный номер")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(contactPhone.isEmpty ? 0 : 1)
+                            .offset(y: contactPhone.isEmpty ? 0 : -20)
+                    }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color("zlGray"))
+                .padding(12)
+                .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
+                .foregroundColor(.gray)
+                .background(Color("Gray_bg"))
                 .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                )
                 
                 Text("Без указания контактного номера телефона будет использован основной номер для связи с вами.")
-                    .font(.callout)
-                    .padding(.horizontal)
+                    .font(Font.custom("Open Sans", size: 12))
+                    .kerning(0.12)
+                    .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 
-                Divider()
-                    .padding(.vertical)
             }
             .animation(.default, value: UUID())
-                
+            
+            Divider()
             
             // контакты - электронные почты
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Электронная почта")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(email.isEmpty ? 0 : 1)
-                    .offset(y: email.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                HStack{
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center, spacing: 12){
                     Image(systemName: "envelope")
-                    TextField("Электронная почта", text: $email)
+                    ZStack(alignment: .leading) {
+                        TextField("Электронная почта", text: $email)
+                        
+                        Text("Электронная почта")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(email.isEmpty ? 0 : 1)
+                            .offset(y: email.isEmpty ? 0 : -20)
+                    }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
+                .padding(12)
+                .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
                 .foregroundColor(.gray)
-                .background(Color("zlGray"))
+                .background(Color("Gray_bg"))
                 .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                )
                 .disabled(true)
                 
                 Button(action: {
                     // to do
                 }, label: {
                     Text("Изменить электронну почту")
-                        .padding(.horizontal)
                 })
                 
-                Text("Контактная почта")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .opacity(contactEmail.isEmpty ? 0 : 1)
-                    .offset(y: contactEmail.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                HStack{
+                HStack(alignment: .center, spacing: 12){
                     Image(systemName: "envelope")
-                    TextField("Контактная почта", text: $contactEmail)
-                        .keyboardType(.emailAddress)
+                    ZStack(alignment: .leading) {
+                        TextField("Контактная почта", text: $contactEmail)
+                            .keyboardType(.emailAddress)
+                        
+                        Text("Контактная почта")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(contactEmail.isEmpty ? 0 : 1)
+                            .offset(y: contactEmail.isEmpty ? 0 : -20)
+                    }
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color("zlGray"))
+                .padding(12)
+                .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64, alignment: .center)
+                .foregroundColor(.gray)
+                .background(Color("Gray_bg"))
                 .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12)
+                        .inset(by: 0.5)
+                        .stroke(Color("Gray_elements"), lineWidth: 1)
+                )
                 
                 Text("Без указания контактной электронной почты будет использована основная электронная почта для связи с вами.")
-                    .font(.callout)
-                    .padding(.horizontal)
+                    .font(Font.custom("Open Sans", size: 12))
+                    .kerning(0.12)
+                    .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 
-                Divider()
-                    .padding(.vertical)
             }
             .animation(.default, value: UUID())
+            
+            Divider()
             
             VStack(alignment: .leading) {
                 Button(action: {
@@ -196,24 +239,26 @@ struct ProfileEdit: View {
                         .padding(.horizontal)
                 })
                 
-                Divider()
-                    .padding(.vertical)
             }
             
-            VStack(alignment: .leading, spacing: 2){
-                Text("Расскажите о себе")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    //.opacity(contactEmail.isEmpty ? 0 : 1)
-                    //.offset(y: contactEmail.isEmpty ? 20 : 0)
-                    .padding(.horizontal)
-                
-                HStack{
-                    TextField("", text: $about)
+            Divider()
+            
+            VStack(alignment: .leading, spacing: 12){
+                HStack(alignment: .center){
+                    ZStack(alignment: .leading){
+                        TextField("Расскажите о себе", text: $about)
+                        
+                        Text("Расскажите о себе")
+                            .font(Font.custom("Open Sans", size: 8))
+                            .foregroundColor(Color.gray)
+                            .frame(width: 157, alignment: .topLeading)
+                            .opacity(about.isEmpty ? 0 : 1)
+                            .offset(y: about.isEmpty ? 0 : -20)
+                    }
                 }
                 .frame(maxWidth: .infinity, idealHeight: 100, maxHeight: 200, alignment: .top)
                 .padding()
-                .background(Color("zlGray"))
+                .background(Color("Gray_bg"))
                 .cornerRadius(12)
             }
             
@@ -233,11 +278,16 @@ struct ProfileEdit: View {
                         .padding()
             })
             .buttonStyle(MainBlueButtonStyle())
-            .padding()
 
         }
-        .padding()
+        .padding(.horizontal, 12)
+        .padding(.vertical, 24)
         .background(.white)
+        .cornerRadius(12)
+        .overlay(RoundedRectangle(cornerRadius: 12)
+                .inset(by: 0.5)
+                .stroke(Color.white, lineWidth: 1)
+        )
         .onAppear(perform: {
             if self.lastName == "" {
                 self.lastName = mainVM.user?.lastName ?? ""

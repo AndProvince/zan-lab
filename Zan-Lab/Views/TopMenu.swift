@@ -10,11 +10,14 @@ import SwiftUI
 struct TopMenu: View {
     @EnvironmentObject var mainVM: MainViewModel
     
+    @Binding var path: [NavView]
+    
     var body: some View {
         if  mainVM.userLogined {
             HStack {
                 Menu {
                     Button(action: {
+                        mainVM.showEditProfile = false
                         mainVM.showProfile = true
                         
                     },
@@ -52,11 +55,16 @@ struct TopMenu: View {
                     })
                     
                 } label: {
-                    HStack{
+                    HStack(alignment: .center, spacing: 8){
                         ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
-                            .frame(width: 36, height: 36)
+                            .frame(width: 34, height: 34)
                             .cornerRadius(8.0)
                         Text(mainVM.user!.getName())
+                            .font(
+                            Font.custom("Montserrat", size: 14)
+                            .weight(.semibold)
+                            )
+                            .foregroundColor(Color(red: 0.21, green: 0.21, blue: 0.21))
                         Spacer()
                     }
                     .padding()
@@ -68,17 +76,17 @@ struct TopMenu: View {
                 }
                 .padding(.horizontal)
             }
-            .background(Color("zlGray"))
+            .background(Color("Gray_bg"))
         } else {
             HStack(alignment: .top){
-                NavigationLink(destination: Login()) {
+                NavigationLink(value: NavView.login) {
                     Text("Вход")
                         .padding(5)
                 }
                 
                 Spacer()
                 
-                NavigationLink(destination: Registration()) {
+                NavigationLink(value: NavView.register) {
                     Text("Регистрация")
                         .foregroundColor(.gray)
                         .padding(5)

@@ -12,60 +12,83 @@ struct ProfileView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
+            HStack(alignment: .top) {
                 Text(mainVM.user!.getName())
-                    .font(.title)
+                    .font(
+                    Font.custom("Montserrat", size: 20)
+                    .weight(.bold)
+                    )
                 Spacer()
             }
-            .padding()
-            .background(.white)
+            .padding(12)
             
             VStack(alignment: .leading) {
                 Text("Контактный телефон")
-                    .font(.caption)
+                    .font(Font.custom("Open Sans", size: 12))
+                    .foregroundColor(Color.gray)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
             
                 Text(mainVM.user!.getMobile())
+                    .font(Font.custom("Open Sans", size: 14))
+                    .foregroundColor(Color.black)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
             }
-            .padding()
+            .padding(.horizontal, 12)
             
             // проверка есть ли у пользователя email
             // вывод информации если есть
-            if ((mainVM.user!.email?.isEmpty) != nil) {
+            if let email = mainVM.user!.email {
                 VStack(alignment: .leading) {
                     Text("Контактный почта")
-                        .font(.caption)
+                        .font(Font.custom("Open Sans", size: 12))
+                        .foregroundColor(Color.gray)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
 
                     Text("\(mainVM.user!.email!)")
+                        .font(Font.custom("Open Sans", size: 14))
+                        .foregroundColor(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding()
+                .padding(12)
             }
             
             // проверка есть ли у пользователя населенный пункт
             // вывод информации если есть
-            if (mainVM.user!.locationRefKeyId != nil) {
+            if let lovationId = mainVM.user!.locationRefKeyId {
+                Divider()
                 VStack(alignment: .leading) {
                     Text("Населенный пункт")
-                        .font(.caption)
+                        .font(Font.custom("Open Sans", size: 12))
+                        .foregroundColor(Color.gray)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
 
                     Text("\(mainVM.allLocations.first(where: { $0.refKeyId ==  mainVM.user!.locationRefKeyId})!.valueRu)")
+                        .font(Font.custom("Open Sans", size: 14))
+                        .foregroundColor(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding()
+                .padding(12)
             }
             
             // проверка есть ли у пользователя информаци о себе
             // вывод информации если есть
             if ((mainVM.user!.about?.isEmpty) != nil) {
+                Divider()
                 VStack(alignment: .leading) {
                     Text("Информация о себе")
-                        .font(.caption)
+                        .font(Font.custom("Open Sans", size: 12))
+                        .foregroundColor(Color.gray)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
 
                     Text(mainVM.user!.about!)
+                        .font(Font.custom("Open Sans", size: 14))
+                        .foregroundColor(Color.black)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding()
+                .padding(12)
             }
             
         }
-        //.padding()
         .background(.white)
     }
 }

@@ -11,12 +11,13 @@ import Combine
 struct Login: View {
     @EnvironmentObject var mainVM: MainViewModel
     
+    @Binding var path: [NavView]
+    
     @State private var telephone = ""
     @State private var password = ""
     
     // Флаг скрыть-показать данные в поле ввода пароля
     @State private var isSecured: Bool = true
-    
     
     private let mask = "+X (XXX) XXX-XX-XX"
     
@@ -99,7 +100,8 @@ struct Login: View {
             Spacer()
                 
             Button(action: {
-                mainVM.doLogin(login: telephone, passord: password)
+                let login = UnFormatByMask(with: mask, phone: self.telephone)
+                mainVM.doLogin(login: login, password: password)
             }, label: {
                 Text("Войти")
                     .font(.title2)
@@ -117,11 +119,17 @@ struct Login: View {
         .padding(.horizontal, 12)
         .padding(.top, 12)
         .navigationTitle("Вход в систему")
+        .onReceive(Just(mainVM.userLogined), perform: { _ in
+            if mainVM.userLogined {
+                path.removeAll()
+            }
+        })
     }
+    
 }
 
-struct Login_Previews: PreviewProvider {
-    static var previews: some View {
-        Login()
-    }
-}
+//struct Login_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Login()
+//    }
+//}

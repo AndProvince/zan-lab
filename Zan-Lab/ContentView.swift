@@ -7,18 +7,24 @@
 
 import SwiftUI
 
+enum NavView {
+    case register, login
+}
+
 struct ContentView: View {
     
     @StateObject var mainVM = MainViewModel()
     
     @State private var tabSelection = 1
     
+    @State private var path: [NavView] = []
+    
     var body: some View {
-        NavigationView{
+        NavigationStack(path: $path){
             VStack(alignment: .leading){
                 // Верхнее меню не скроллится и не входит в табы
                 HStack{
-                    TopMenu()
+                    TopMenu(path: $path)
                 }
                 
                 // Делитель на табы снизу
@@ -68,12 +74,14 @@ struct ContentView: View {
                     .tag(4)
                 }
             }
-            .background(Color("zlGray"))
-            .background(
-                Group {
-                    NavigationLink(destination: Profile(), isActive: $mainVM.showProfile) { EmptyView() }
+            .background(Color("Gray_bg"))
+            .navigationDestination(for: NavView.self) { view in
+                switch view {
+                case .register: Registration(path: $path)
+                case .login: Login(path: $path)
                 }
-            )
+            }
+            .navigationDestination(isPresented: $mainVM.showProfile) { Profile() }
         }
         .background(Color("zlGray"))
         .edgesIgnoringSafeArea(.all)

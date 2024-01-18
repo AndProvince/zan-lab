@@ -30,7 +30,9 @@ struct Profile: View {
                         
                     } label: {
                         ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
-                            .frame(minWidth: 200, idealWidth: 300, maxWidth: .infinity, minHeight: 200, idealHeight: 300, maxHeight: 300)
+                            //.foregroundColor(.clear)
+                            .frame(width: 296, height: 304)
+                            .background(Color("Gray_bg"))
                             .cornerRadius(12.0)
                             .scaledToFill()
                             .padding()

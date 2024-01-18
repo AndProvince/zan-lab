@@ -46,13 +46,13 @@ class MainViewModel: ObservableObject {
     func logout() {
         //UserDefaultsWorker.shared.dropTokens()
         Requester.shared.dropTokens()
-        userLogined = false
+        self.userLogined = false
     }
     
-    func doLogin(login: String, passord: String) {
+    func doLogin(login: String, password: String) {
         print("login called")
-        Requester.shared.login(authBody: AuthBody(username: login, password: passord)) { result in
-            print("login result: \(result)")
+        Requester.shared.login(authBody: AuthBody(username: login, password: password)) { result in
+            //print("login result: \(result)")
             switch result {
             case .success(_):
                 print("login complited")

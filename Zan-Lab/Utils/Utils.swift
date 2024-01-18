@@ -39,26 +39,9 @@ func UnFormatByMask(with mask: String, phone: String) -> String {
     return result
 }
 
-func SaveRomanLettersAndDigits(word: String) -> String {
-    let result = word.replacingOccurrences(of: "[^A-Za-z0-9]", with: "", options: .regularExpression)
+func isPasswordValid(password: String) -> Bool {
+    let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[~`!@#$%^&*()\\-_=+\\[\\]{}\\\\|<>;:'\",.?]).{6,25}$"
+    let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
     
-    return result
-}
-
-func IsNeedNumber(word: String) -> Bool {
-    let result = word.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-    
-    return result.isEmpty
-}
-
-func IsNeedUpper(word: String) -> Bool {
-    let result = word.replacingOccurrences(of: "[^A-Z]", with: "", options: .regularExpression)
-    
-    return result.isEmpty
-}
-
-func IsNeedLower(word: String) -> Bool {
-    let result = word.replacingOccurrences(of: "[^a-z]", with: "", options: .regularExpression)
-    
-    return result.isEmpty
+    return passwordTest.evaluate(with: password)
 }

@@ -25,15 +25,16 @@ struct User: Codable {
     }
     
     func getName() -> String {
-        if lastName!.isEmpty || firstName!.isEmpty {
-            return "User#\(id)"
+        if let lname = lastName, let fname = firstName {
+            return "\(lname) \(fname)"
         } else {
-            return "\(lastName!) \(firstName!)"
+            return "User#\(id)"
         }
     }
     
     func getMobile() -> String {
-        return "+\(mobile)"
+        let mask = "+X (XXX) XXX-XX-XX"
+        return FormatByMask(with: mask, phone: mobile)
     }
     
     func isEmail() -> Bool {
