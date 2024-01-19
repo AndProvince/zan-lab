@@ -11,7 +11,17 @@ struct ProfileView: View {
     @EnvironmentObject var mainVM: MainViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/) {
+            ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
+        }
+        .frame(width: 296, height: 304)
+        .background(Color("Gray_bg"))
+        .cornerRadius(12.0)
+        .scaledToFill()
+        .padding()
+        
+        VStack(alignment: .leading, spacing: 24) {
+            
             HStack(alignment: .top) {
                 Text(mainVM.user!.getName())
                     .font(
@@ -20,7 +30,7 @@ struct ProfileView: View {
                     )
                 Spacer()
             }
-            .padding(12)
+            .padding(.bottom, 12)
             
             VStack(alignment: .leading) {
                 Text("Контактный телефон")
@@ -89,7 +99,14 @@ struct ProfileView: View {
             }
             
         }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 24)
         .background(.white)
+        .cornerRadius(12)
+        .overlay(RoundedRectangle(cornerRadius: 12)
+                .inset(by: 0.5)
+                .stroke(Color.white, lineWidth: 1)
+        )
     }
 }
 

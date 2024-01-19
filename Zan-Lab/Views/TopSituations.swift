@@ -30,39 +30,37 @@ struct TopSituations: View {
     @EnvironmentObject var mainVM: MainViewModel
     
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing: 12){
             Text("Частые ситуации")
                 .font(
                 Font.custom("Montserrat", size: 24)
                 .weight(.bold)
                 )
-                .padding()
+                .padding(.leading, 12)
             
             withAnimation {
                 ScrollView(.horizontal){
                     if !mainVM.topCases.isEmpty {
                         GridStact(rows: 3, columns: 3) { row, col in
                             Button(action: { }) {
-                                HStack{
+                                HStack(alignment: .center, spacing: 12){
                                     ImageView(url: mainVM.topCases[row*3+col].caseInfo.files.first?.getImageURL())
                                         .frame(width: 18, height: 18)
-                                        .padding(.leading)
                                     Text(mainVM.topCases[row*3+col].caseInfo.caseNameRu)
                                         .font(
                                         Font.custom("Montserrat", size: 14)
                                         .weight(.semibold)
                                         )
                                 }
+                                .padding(12)
                                 .frame(width: 264, height: 83, alignment: .leading)
                             }
                             .buttonStyle(TopSituationButtonStyle())
-                            .padding([.bottom,.horizontal])
-                            
-                            
                         }
+                        .padding([.bottom, .horizontal], 12)
                     } else {
                         ProgressView()
-                            .padding(.bottom)
+                            //.padding(.bottom)
                     }
                 }
                 .shadow(radius: 5)

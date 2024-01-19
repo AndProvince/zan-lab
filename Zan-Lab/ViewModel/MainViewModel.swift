@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MainViewModel: ObservableObject {
     
@@ -111,6 +112,30 @@ class MainViewModel: ObservableObject {
                 print("Network error")
             }
         }
+    }
+    
+    func saveProfilePhoto(image: UIImage) {
+        print("save Profile Photo called")
+        Requester.shared.savePhoto(image: image) { result in
+            print(result)
+            switch result {
+            case .success(let photoName):
+                print("photo uploaded")
+                print(photoName)
+            case .serverError(_):
+                // to do alert
+                print("Server error")
+            case .authError(_):
+                // to do alert
+                self.logout()
+                print("Auth error")
+            case .networkError(_):
+                // to do alert
+                print("Network error")
+            }
+        }
+        let data = image.jpegData(compressionQuality: 1)
+        print(data)
     }
     
     func sendOtp(login: String) {

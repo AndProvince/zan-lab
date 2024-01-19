@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ErrorResponse: Codable {
     let timestamp: String
@@ -227,6 +228,9 @@ class Requester {
             }
             //print(String(data: data, encoding: .utf8)!)
             print("Статус код \(httpResponse.statusCode)")
+            print(data)
+            print(response)
+            print(error)
             
             if httpResponse.isSuccessful() {
                 let responseBody: Result<T> = self.parseResponse(data: data)
@@ -343,6 +347,23 @@ class Requester {
         let url = Endpoint.getUser.absoluteURL
         let body = try! JSONEncoder().encode(user)
         let request = formRequest(url: url, data: body, method: "PUT")
+        self.request(request: request, onResult: onResult)
+    }
+    
+    func savePhoto(image: UIImage, onResult: @escaping (Result<String>) -> Void) {
+        let url = Endpoint.savePhoto.absoluteURL
+        let imageData = image.jpegData(compressionQuality: 1)! as Data
+        let fileContent = String(data: imageData, encoding: .utf8)
+        let boundary = "Boundary-\(UUID().uuidString)"
+        var body = ""
+        body += "--\(boundary)\r\n"
+        body += "Content-Disposition: form-data; name=\"file\"; "
+        body += "filename=\"temp.jpg\"\n" + "Content-Type: image/png\n\n\(fileContent)\r\n"
+        body += "--\(boundary)--\r\n"
+        let postData = body.data(using: .utf8)
+        
+        let request = formRequest(url: url, data: postData!, contentType: "multipart/form-data; boundary=\(boundary)")
+        
         self.request(request: request, onResult: onResult)
     }
     

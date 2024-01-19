@@ -18,6 +18,7 @@ enum Endpoint {
     case login
     case refreshTokens
     case getUser
+    case savePhoto
     case getCases
     case getAllCases
     case getAllSteps
@@ -38,6 +39,8 @@ enum Endpoint {
             return "/oauth2/token"
         case .getUser:
             return "/api/zanpro-api/api/v1/person"
+        case .savePhoto:
+            return "/api/zanpro-api/api/v1/person/photo"
         case .getCases:
             return "/api/zanpro-api/api/v1/cases-top/search"
         case .getAllCases:

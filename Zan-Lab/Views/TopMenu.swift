@@ -14,7 +14,7 @@ struct TopMenu: View {
     
     var body: some View {
         if  mainVM.userLogined {
-            HStack {
+            HStack(alignment: .center, spacing: 8) {
                 Menu {
                     Button(action: {
                         mainVM.showEditProfile = false
@@ -23,6 +23,7 @@ struct TopMenu: View {
                     },
                            label: {
                         Image(systemName: "person")
+                            .frame(width: 18, height: 18)
                         Text("Личный кабинет")
                             .font(Font.custom("Open Sans", size: 16))
                             .kerning(0.16)
@@ -31,6 +32,7 @@ struct TopMenu: View {
                     Button(action: { },
                            label: {
                         Image(systemName: "text.bubble")
+                            .frame(width: 18, height: 18)
                         Text("Мои обращения")
                             .font(Font.custom("Open Sans", size: 16))
                             .kerning(0.16)
@@ -42,6 +44,7 @@ struct TopMenu: View {
                     },
                            label: {
                         Image(systemName: "pencil")
+                            .frame(width: 18, height: 18)
                         Text("Редактировать профиль")
                             .font(Font.custom("Open Sans", size: 16))
                             .kerning(0.16)
@@ -50,6 +53,7 @@ struct TopMenu: View {
                     Button(action: { },
                            label: {
                         Image(systemName: "person.badge.shield.checkmark")
+                            .frame(width: 18, height: 18)
                         Text("Регистрация специалиста")
                             .font(Font.custom("Open Sans", size: 16))
                             .kerning(0.16)
@@ -65,52 +69,49 @@ struct TopMenu: View {
                     })
                     
                 } label: {
-                    HStack(alignment: .center, spacing: 8){
-                        ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
-                            .frame(width: 34, height: 34)
-                            .cornerRadius(8.0)
-                        Text(mainVM.user!.getName())
-                            .font(
-                            Font.custom("Montserrat", size: 14)
-                            .weight(.semibold)
-                            )
-                            .foregroundColor(Color(red: 0.21, green: 0.21, blue: 0.21))
-                        Spacer()
-                    }
-                    .padding()
-                    .foregroundColor(Color.black)
-                    .background(.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
-                    
+                    ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
+                        .frame(width: 34, height: 34)
+                        .cornerRadius(8.0)
+                    Text(mainVM.user!.getName())
+                        .font(
+                        Font.custom("Montserrat", size: 14)
+                        .weight(.semibold)
+                        )
+                        .foregroundColor(Color(red: 0.21, green: 0.21, blue: 0.21))
+                    Spacer()
                 }
-                .padding(.horizontal)
+                .padding(12)
+                .frame(height: 60, alignment: .leading)
+                .background(.white)
+                .cornerRadius(12)
+                .padding(.horizontal, 12)
             }
             .background(Color("Gray_bg"))
         } else {
-            HStack(alignment: .top){
+            HStack(alignment: .center, spacing: 8){
                 NavigationLink(value: NavView.login) {
-                    Text("Вход")
-                        .padding(5)
+                    Text("Авторизация")
+                        .font(Font.custom("Open Sans", size: 12))
+                        .kerning(0.12)
                 }
                 
                 Spacer()
                 
                 NavigationLink(value: NavView.register) {
                     Text("Регистрация")
-                        .foregroundColor(.gray)
-                        .padding(5)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
+                        .font(Font.custom("Open Sans", size: 12))
+                        .kerning(0.12)
+                        .foregroundColor(.black)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.gray, lineWidth: 1))
                 }
             }
-            .padding()
-            //.foregroundColor(Color.black)
+            .padding(12)
+            .frame(height: 60, alignment: .leading)
             .background(.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            .font(.body)
-            .padding(.horizontal)
+            .cornerRadius(12)
+            .padding(.horizontal, 12)
         }
     }
 }
