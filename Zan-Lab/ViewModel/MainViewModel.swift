@@ -117,11 +117,11 @@ class MainViewModel: ObservableObject {
     func saveProfilePhoto(image: UIImage) {
         print("save Profile Photo called")
         Requester.shared.savePhoto(image: image) { result in
-            print(result)
+            print("Result - \(result)")
             switch result {
             case .success(let photoName):
                 print("photo uploaded")
-                print(photoName)
+                self.user?.photoFileId = photoName
             case .serverError(_):
                 // to do alert
                 print("Server error")
