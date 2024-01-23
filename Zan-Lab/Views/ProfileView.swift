@@ -47,7 +47,7 @@ struct ProfileView: View {
             
             // проверка есть ли у пользователя email
             // вывод информации если есть
-            if let email = mainVM.user!.email {
+            if mainVM.user!.email != nil {
                 VStack(alignment: .leading) {
                     Text("Контактный почта")
                         .font(Font.custom("Open Sans", size: 12))
@@ -64,7 +64,7 @@ struct ProfileView: View {
             
             // проверка есть ли у пользователя населенный пункт
             // вывод информации если есть
-            if let lovationId = mainVM.user!.locationRefKeyId {
+            if mainVM.user!.locationRefKeyId != nil {
                 Divider()
                     .padding(.bottom, 12)
                 
