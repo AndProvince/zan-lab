@@ -22,8 +22,8 @@ struct SpecialiststList: View {
                                 .resizable()
                                 .frame(width: 60, height: 60)
                             VStack{
-                                Text(spec.person.lastName ?? "")
-                                Text(spec.person.firstName ?? "")
+                                Text(spec.person.lastName)
+                                Text(spec.person.firstName)
                             }
                         }
                     }

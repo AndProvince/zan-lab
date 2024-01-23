@@ -30,7 +30,7 @@ struct CreateRequest: View {
                 
                 HStack {
                     Picker("Выберите ситуацию", selection: $selectedCase) {
-                        ForEach(0 ..< mainVM.allCases.count) { index in
+                        ForEach(0 ..< mainVM.allCases.count, id: \.self) { index in
                             Text("\(mainVM.allCases[index].caseNameRu)")
                                 .foregroundColor(.black)
                         }
@@ -46,7 +46,7 @@ struct CreateRequest: View {
                 
                 HStack {
                     Picker("На каком этапе ситуация", selection: $selectedStep) {
-                        ForEach(0 ..< mainVM.allSteps.count) { index in
+                        ForEach(0 ..< mainVM.allSteps.count, id: \.self) { index in
                             Text("\(mainVM.allSteps[index].stepNameRu)")
                                 .foregroundColor(.black)
                         }
@@ -81,7 +81,7 @@ struct CreateRequest: View {
                 
                 HStack {
                     Picker("Место происшествия", selection: $selectedLocation) {
-                        ForEach(0 ..< mainVM.allLocations.count) { index in
+                        ForEach(0 ..< mainVM.allLocations.count, id: \.self) { index in
                             Text("\(mainVM.allLocations[index].valueRu)")
                                 .foregroundColor(Color.black)
                         }

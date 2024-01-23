@@ -106,7 +106,7 @@ struct ProfileEdit: View {
                 
                 HStack {
                     Picker("Населенный пункт", selection: $selectedLocation) {
-                        ForEach(0 ..< mainVM.allLocations.count) { index in
+                        ForEach(0 ..< mainVM.allLocations.count, id: \.self) { index in
                             Text("\(mainVM.allLocations[index].valueRu)")
                                 .foregroundColor(Color.black)
                         }

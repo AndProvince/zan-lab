@@ -82,7 +82,7 @@ struct Search: View {
                 if self.specializationSearch {
                     HStack {
                         Picker("Ситуация", selection: $selectedCase) {
-                            ForEach(0 ..< mainVM.allCases.count) { index in
+                            ForEach(0 ..< mainVM.allCases.count, id: \.self) { index in
                                 Text("\(mainVM.allCases[index].caseNameRu)")
                                     .foregroundColor(.black)
                             }
@@ -98,7 +98,7 @@ struct Search: View {
                 } else {
                     HStack {
                         Picker("Специализация", selection: $selectedSpecialization) {
-                            ForEach(0 ..< mainVM.allSpecializations.count) { index in
+                            ForEach(0 ..< mainVM.allSpecializations.count, id: \.self) { index in
                                 Text("\(mainVM.allSpecializations[index].valueRu)")
                                     .foregroundColor(.black)
                             }
@@ -136,7 +136,7 @@ struct Search: View {
             // выбор населенного пункта
             HStack {
                 Picker("Населенный пункт", selection: $selectedLocation) {
-                    ForEach(0 ..< mainVM.allLocations.count) { index in
+                    ForEach(0 ..< mainVM.allLocations.count, id: \.self) { index in
                         Text("\(mainVM.allLocations[index].valueRu)")
                             .foregroundColor(.black)
                     }
