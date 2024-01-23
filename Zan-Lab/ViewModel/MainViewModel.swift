@@ -134,8 +134,10 @@ class MainViewModel: ObservableObject {
                 print("Network error")
             }
         }
-        let data = image.jpegData(compressionQuality: 1)
-        print(data)
+    }
+    
+    func deleteProfilePhoto() {
+        self.user?.photoFileId = ""
     }
     
     func sendOtp(login: String) {

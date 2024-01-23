@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileEdit: View {
     @EnvironmentObject var mainVM: MainViewModel
@@ -34,7 +35,9 @@ struct ProfileEdit: View {
                     Text("Изменить фото")
                 })
                 
-                Button(action: { },
+                Button(action: { 
+                    mainVM.deleteProfilePhoto()
+                },
                        label: {
                     Image(systemName: "trash")
                     Text("Удалить фото")
@@ -49,15 +52,6 @@ struct ProfileEdit: View {
         .cornerRadius(12.0)
         .scaledToFill()
         .padding()
-        
-        Button(action: {
-            if let selectedImage = selectedImage {
-                print("photo selected")
-                mainVM.saveProfilePhoto(image: selectedImage)
-            }
-        }, label: {
-            Text("Save photo")
-        })
         
         VStack(alignment: .leading, spacing: 24) {
             Text("Личная информация")
@@ -349,6 +343,12 @@ struct ProfileEdit: View {
         })
         .sheet(isPresented: $isImagePickerPresented, content: {
             ImagePicker(selectedImage: $selectedImage)
+                .onChange(of: selectedImage){ _ in
+                    if let selectedImage = selectedImage {
+                        print("photo selected")
+                        mainVM.saveProfilePhoto(image: selectedImage)
+                    }
+                }
         })
     }
 }

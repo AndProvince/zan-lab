@@ -20,7 +20,7 @@ struct ProfileView: View {
         .scaledToFill()
         .padding()
         
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading) {
             
             HStack(alignment: .top) {
                 Text(mainVM.user!.getName())
@@ -30,20 +30,20 @@ struct ProfileView: View {
                     )
                 Spacer()
             }
-            .padding(.bottom, 12)
+            .padding(.bottom, 24)
             
             VStack(alignment: .leading) {
                 Text("Контактный телефон")
                     .font(Font.custom("Open Sans", size: 12))
                     .foregroundColor(Color.gray)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
-            
+                
                 Text(mainVM.user!.getMobile())
                     .font(Font.custom("Open Sans", size: 14))
                     .foregroundColor(Color.black)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
             }
-            .padding(.horizontal, 12)
+            .padding(.bottom, 12)
             
             // проверка есть ли у пользователя email
             // вывод информации если есть
@@ -59,13 +59,15 @@ struct ProfileView: View {
                         .foregroundColor(Color.black)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding(12)
+                .padding(.bottom, 12)
             }
             
             // проверка есть ли у пользователя населенный пункт
             // вывод информации если есть
             if let lovationId = mainVM.user!.locationRefKeyId {
                 Divider()
+                    .padding(.bottom, 12)
+                
                 VStack(alignment: .leading) {
                     Text("Населенный пункт")
                         .font(Font.custom("Open Sans", size: 12))
@@ -77,12 +79,12 @@ struct ProfileView: View {
                         .foregroundColor(Color.black)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding(12)
+                .padding(.bottom, 12)
             }
             
             // проверка есть ли у пользователя информаци о себе
             // вывод информации если есть
-            if ((mainVM.user!.about?.isEmpty) != nil) {
+            if let about = mainVM.user!.about, !about.isEmpty {
                 Divider()
                 VStack(alignment: .leading) {
                     Text("Информация о себе")
@@ -95,7 +97,6 @@ struct ProfileView: View {
                         .foregroundColor(Color.black)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding(12)
             }
             
         }

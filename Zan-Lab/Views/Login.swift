@@ -113,7 +113,6 @@ struct Login: View {
                         .shadow(radius: 20))
             })
             .cornerRadius(10)
-            .padding()
 
         }
         .padding(.horizontal, 12)
