@@ -11,34 +11,8 @@ struct Profile: View {
     @EnvironmentObject var mainVM: MainViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {            
+        VStack(alignment: .leading) {
             ScrollView {
-                // вывод аваратки и меню по ее изменению
-                Section {
-                    Menu {
-                        Button(action: { },
-                               label: {
-                            Image(systemName: "arrow.triangle.2.circlepath.camera")
-                            Text("Изменить фото")
-                        })
-                        
-                        Button(action: {}
-                               , label: {
-                            Image(systemName: "trash")
-                            Text("Удалить фото")
-                        })
-                        
-                    } label: {
-                        ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
-                            //.foregroundColor(.clear)
-                            .frame(width: 296, height: 304)
-                            .background(Color("Gray_bg"))
-                            .cornerRadius(12.0)
-                            .scaledToFill()
-                            .padding()
-                    }
-                }
-                
                 if mainVM.showEditProfile {
                     ProfileEdit()
                 } else {
@@ -46,7 +20,7 @@ struct Profile: View {
                 }
             }
         }
-        .background(Color("zlGray"))
+        .background(Color("Gray_bg"))
         .navigationTitle(mainVM.user!.getName())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing){

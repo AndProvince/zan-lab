@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		55AEBDE12B5623DA000B273D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AEBDE02B5623DA000B273D /* Utils.swift */; };
+		55AEBDE52B5A35CD000B273D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AEBDE42B5A35CD000B273D /* ImagePicker.swift */; };
 		77A26EC82AC033220012520B /* Zan_LabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EC72AC033220012520B /* Zan_LabApp.swift */; };
 		77A26ECA2AC033220012520B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A26EC92AC033220012520B /* ContentView.swift */; };
 		77A26ECC2AC033260012520B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77A26ECB2AC033260012520B /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		55AEBDE02B5623DA000B273D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		55AEBDE42B5A35CD000B273D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		77A26EC42AC033220012520B /* Zan-Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zan-Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A26EC72AC033220012520B /* Zan_LabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zan_LabApp.swift; sourceTree = "<group>"; };
 		77A26EC92AC033220012520B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				77D1805E2AC488BA00226CBE /* UserDefaultsWorker.swift */,
 				77D180602AC4892B00226CBE /* Extensions.swift */,
 				55AEBDE02B5623DA000B273D /* Utils.swift */,
+				55AEBDE42B5A35CD000B273D /* ImagePicker.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				77D1806E2AC8890A00226CBE /* Search.swift in Sources */,
 				77D180612AC4892B00226CBE /* Extensions.swift in Sources */,
 				77A26ED92AC07BD40012520B /* TopMenu.swift in Sources */,
+				55AEBDE52B5A35CD000B273D /* ImagePicker.swift in Sources */,
 				77E0A4402AD3A5B9000C8346 /* Refs.swift in Sources */,
 				77D180722ACC871100226CBE /* SpecialiststList.swift in Sources */,
 				77D180762ACD51CB00226CBE /* ButtonsStyles.swift in Sources */,

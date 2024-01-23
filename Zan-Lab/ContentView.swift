@@ -83,7 +83,7 @@ struct ContentView: View {
             }
             .navigationDestination(isPresented: $mainVM.showProfile) { Profile() }
         }
-        .background(Color("zlGray"))
+        .background(Color("Gray_bg"))
         .edgesIgnoringSafeArea(.all)
         .environmentObject(mainVM)
         .navigationViewStyle(StackNavigationViewStyle())

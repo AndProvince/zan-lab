@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ErrorResponse: Codable {
     let timestamp: String
@@ -227,6 +228,9 @@ class Requester {
             }
             //print(String(data: data, encoding: .utf8)!)
             print("Статус код \(httpResponse.statusCode)")
+//            print(data)
+//            print(response)
+//            print(error)
             
             if httpResponse.isSuccessful() {
                 let responseBody: Result<T> = self.parseResponse(data: data)
@@ -248,8 +252,17 @@ class Requester {
         do {
 //            if let JSONString = String(data: data, encoding: String.Encoding.utf8) {
 //                print("data - \(JSONString)")
+//                print("T - \(T.self)")
 //            }
-            return .success(try JSONDecoder().decode(T.self, from: data))
+            var response: Any?
+            
+            if T.self == String.self {
+                response = String(data: data, encoding: String.Encoding.utf8)
+            }
+            else {
+                response = try JSONDecoder().decode(T.self, from: data)
+            }
+            return .success(response as! T)
         } catch {
             return parseError(data: data)
         }
@@ -343,6 +356,25 @@ class Requester {
         let url = Endpoint.getUser.absoluteURL
         let body = try! JSONEncoder().encode(user)
         let request = formRequest(url: url, data: body, method: "PUT")
+        self.request(request: request, onResult: onResult)
+    }
+    
+    func savePhoto(image: UIImage, onResult: @escaping (Result<String>) -> Void) {
+        let url = Endpoint.savePhoto.absoluteURL
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            return // todo
+        }
+        //let fileContent = String(data: imageData, encoding: .utf8)
+        let boundary = "Boundary-\(UUID().uuidString)"
+        var body = Data()
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n".data(using: .utf8)!)
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        let request = formRequest(url: url, data: body, contentType: "multipart/form-data; boundary=\(boundary)")
         self.request(request: request, onResult: onResult)
     }
     

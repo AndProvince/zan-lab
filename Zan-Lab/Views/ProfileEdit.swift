@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ProfileEdit: View {
     @EnvironmentObject var mainVM: MainViewModel
+    
+    @State private var selectedImage: UIImage?
+    @State private var isImagePickerPresented: Bool = false
     
     @State private var lastName = ""
     @State private var firstName = ""
@@ -20,6 +24,35 @@ struct ProfileEdit: View {
     @State private var about = ""
     
     var body: some View {
+        // вывод аваратки и меню по ее изменению
+        VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)  {
+            Menu {
+                Button(action: {
+                    isImagePickerPresented.toggle()
+                },
+                       label: {
+                    Image(systemName: "arrow.triangle.2.circlepath.camera")
+                    Text("Изменить фото")
+                })
+                
+                Button(action: { 
+                    mainVM.deleteProfilePhoto()
+                },
+                       label: {
+                    Image(systemName: "trash")
+                    Text("Удалить фото")
+                })
+                
+            } label: {
+                ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
+            }
+        }
+        .frame(width: 296, height: 304)
+        .background(Color("Gray_bg"))
+        .cornerRadius(12.0)
+        .scaledToFill()
+        .padding()
+        
         VStack(alignment: .leading, spacing: 24) {
             Text("Личная информация")
                 .font(
@@ -156,7 +189,7 @@ struct ProfileEdit: View {
                 Text("Без указания контактного номера телефона будет использован основной номер для связи с вами.")
                     .font(Font.custom("Open Sans", size: 12))
                     .kerning(0.12)
-                    .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                    .foregroundColor(Color.gray)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 
             }
@@ -223,7 +256,7 @@ struct ProfileEdit: View {
                 Text("Без указания контактной электронной почты будет использована основная электронная почта для связи с вами.")
                     .font(Font.custom("Open Sans", size: 12))
                     .kerning(0.12)
-                    .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                    .foregroundColor(Color.gray)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 
             }
@@ -307,6 +340,15 @@ struct ProfileEdit: View {
             if self.about == "" {
                 self.about = mainVM.user?.about ?? ""
             }
+        })
+        .sheet(isPresented: $isImagePickerPresented, content: {
+            ImagePicker(selectedImage: $selectedImage)
+                .onChange(of: selectedImage){ _ in
+                    if let selectedImage = selectedImage {
+                        print("photo selected")
+                        mainVM.saveProfilePhoto(image: selectedImage)
+                    }
+                }
         })
     }
 }

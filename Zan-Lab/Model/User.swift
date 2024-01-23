@@ -25,7 +25,7 @@ struct User: Codable {
     }
     
     func getName() -> String {
-        if let lname = lastName, let fname = firstName {
+        if let lname = lastName, let fname = firstName, !lname.isEmpty {
             return "\(lname) \(fname)"
         } else {
             return "User#\(id)"
