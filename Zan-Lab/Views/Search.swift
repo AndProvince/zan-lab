@@ -22,6 +22,7 @@ struct Search: View {
     @State private var selectedCase = -1
     @State private var selectedLocation = -1
     @State private var selectedSpecialization = -1
+    @State private var selectedStep = -1
     
     private var defaultValues: Bool {
         return workExperience == 0 && selectedCase == self.defaultValue && selectedLocation == self.defaultValue && selectedSpecialization == self.defaultValue
@@ -144,40 +145,81 @@ struct Search: View {
                                     )
                                 }
                             } else {
-                                Menu {
-                                    ForEach(0 ..< mainVM.allCases.count, id: \.self) { index in
-                                        Button("\(mainVM.allCases[index].caseNameRu)") {
-                                            withAnimation {
-                                                selectedCase = index
+                                VStack {
+                                    Menu {
+                                        ForEach(0 ..< mainVM.allCases.count, id: \.self) { index in
+                                            Button("\(mainVM.allCases[index].caseNameRu)") {
+                                                withAnimation {
+                                                    selectedCase = index
+                                                }
                                             }
                                         }
-                                    }
-                                } label: {
-                                    HStack {
-                                        ZStack(alignment: .leading) {
-                                            Text("Ситуация")
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                                .opacity(selectedCase == defaultValue ? 0 : 1)
-                                                .offset(y: selectedCase == defaultValue ? 0 : -20)
-                                            
-                                            Text(selectedCase == defaultValue ? "Ситуация" : "\(mainVM.allCases[selectedCase].caseNameRu)")
-                                                .font(Font.custom("Open Sans", size: 14))
-                                                .kerning(0.14)
-                                                .foregroundColor(selectedCase == defaultValue ? Color(red: 0.51, green: 0.51, blue: 0.51) : Color(red: 0.21, green: 0.21, blue: 0.21))
-                                                .frame(maxWidth: .infinity, minHeight: 20, maxHeight: 20, alignment: .topLeading)
-                                                .padding(.vertical, 8)
+                                    } label: {
+                                        HStack {
+                                            ZStack(alignment: .leading) {
+                                                Text("Ситуация")
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                                    .opacity(selectedCase == defaultValue ? 0 : 1)
+                                                    .offset(y: selectedCase == defaultValue ? 0 : -20)
+                                                
+                                                Text(selectedCase == defaultValue ? "Ситуация" : "\(mainVM.allCases[selectedCase].caseNameRu)")
+                                                    .font(Font.custom("Open Sans", size: 14))
+                                                    .kerning(0.14)
+                                                    .foregroundColor(selectedCase == defaultValue ? Color(red: 0.51, green: 0.51, blue: 0.51) : Color(red: 0.21, green: 0.21, blue: 0.21))
+                                                    .frame(maxWidth: .infinity, minHeight: 20, maxHeight: 20, alignment: .topLeading)
+                                                    .padding(.vertical, 8)
+                                            }
+                                            Spacer()
                                         }
-                                        Spacer()
+                                        .padding(12)
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                        .background(Color("Gray_bg"))
+                                        .cornerRadius(12)
+                                        .overlay(RoundedRectangle(cornerRadius: 12)
+                                            .inset(by: 1)
+                                            .stroke(Color(red: 0.94, green: 0.94, blue: 0.94), lineWidth: 2)
+                                        )
                                     }
-                                    .padding(12)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                    .background(Color("Gray_bg"))
-                                    .cornerRadius(12)
-                                    .overlay(RoundedRectangle(cornerRadius: 12)
-                                        .inset(by: 1)
-                                        .stroke(Color(red: 0.94, green: 0.94, blue: 0.94), lineWidth: 2)
-                                    )
+                                    
+                                    // выбор этапа на котором находится ситуация
+                                    if selectedCase != defaultValue {
+                                        Menu {
+                                            ForEach(0 ..< mainVM.allSteps.count, id: \.self) { index in
+                                                Button("\(mainVM.allSteps[index].stepHintRu)") {
+                                                    withAnimation {
+                                                        selectedStep = index
+                                                    }
+                                                }
+                                            }
+                                        } label: {
+                                            HStack {
+                                                ZStack(alignment: .leading) {
+                                                    Text("Этап ситуации")
+                                                        .font(.caption)
+                                                        .foregroundColor(.gray)
+                                                        .opacity(selectedStep == defaultValue ? 0 : 1)
+                                                        .offset(y: selectedStep == defaultValue ? 0 : -20)
+                                                    
+                                                    Text(selectedStep == defaultValue ? "Этап ситуации" : "\(mainVM.allSteps[selectedStep].stepHintRu)")
+                                                        .font(Font.custom("Open Sans", size: 14))
+                                                        .kerning(0.14)
+                                                        .foregroundColor(selectedStep == defaultValue ? Color(red: 0.51, green: 0.51, blue: 0.51) : Color(red: 0.21, green: 0.21, blue: 0.21))
+                                                        .frame(maxWidth: .infinity, minHeight: 20, maxHeight: 20, alignment: .topLeading)
+                                                        .padding(.vertical, 8)
+                                                }
+                                                Spacer()
+                                            }
+                                            .padding(12)
+                                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                                            .background(Color("Gray_bg"))
+                                            .cornerRadius(12)
+                                            .overlay(RoundedRectangle(cornerRadius: 12)
+                                                .inset(by: 1)
+                                                .stroke(Color(red: 0.94, green: 0.94, blue: 0.94), lineWidth: 2)
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -279,6 +321,7 @@ struct Search: View {
                                 selectedCase = -1
                                 selectedLocation = -1
                                 selectedSpecialization = -1
+                                selectedStep = -1
                                 // to do - add more field
                             }
                         }, label: {
