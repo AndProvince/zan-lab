@@ -12,6 +12,8 @@ struct Search: View {
     
     @State private var searchQuery = ""
     
+    @State private var showDetails = false
+    
     @State private var searchType: String = "Поиск по специализации"
     @State private var showFilter = false
     
@@ -22,10 +24,13 @@ struct Search: View {
     @State private var selectedCase = -1
     @State private var selectedLocation = -1
     @State private var selectedSpecialization = -1
+    @State private var selectedStep = -1
     
     private var defaultValues: Bool {
         return workExperience == 0 && selectedCase == self.defaultValue && selectedLocation == self.defaultValue && selectedSpecialization == self.defaultValue
     }
+    
+    @State private var specialistToDetail: User? // = User(id: -1, mobile: "")
     
     var body: some View {
         VStack(alignment: .center) {
@@ -64,32 +69,96 @@ struct Search: View {
             .padding(.horizontal, 12)
             
             ZStack(alignment: .topLeading) {
-                VStack {
+                
+                VStack(alignment: .leading, spacing: 8) {
                     // вывод специалистов
                     List(mainVM.specialists, id: \.person.id) { specialist in
-                        NavigationLink(destination: {
-                            Text("Детальная информация")
-                        }, label: {
-                            ScrollView {
-                                VStack {
+                        
+                        Button(action: {
+                            showDetails.toggle()
+                            print("\(specialist.person.mobile)")
+                            
+                        }) {
+                            VStack (alignment: .leading) {
+                                HStack (alignment: .center) {
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: 60, height: 60)
+                                        .background(
+                                            ImageView(url: specialist.person.getImageURL(), backupImage: "person")
+                                                .frame(width: 60, height: 60)
+                                                .clipped()
+                                        )
+                                    VStack (alignment: .leading) {
+                                        Text("\(specialist.person.lastName!) \(specialist.person.firstName!)")
+                                            .font(Font.custom("Montserrat", size: 16)
+                                                .weight(.semibold)
+                                            )
+                                            .foregroundColor(Color(red: 0.21, green: 0.21, blue: 0.21))
+                                        
+                                        Text("\(mainVM.allLocations.first(where: { $0.refKeyId ==  specialist.person.locationRefKeyId})!.valueRu)")
+                                            .font(Font.custom("Open Sans", size: 12))
+                                            .kerning(0.12)
+                                            .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                                    }
+                                    Spacer()
+                                }
+                                .padding(.bottom, 8)
+                                
+                                Divider()
+                                
+                                ForEach(0 ..< specialist.totalSpec, id: \.self) { index in
                                     HStack {
-                                        ImageView(url: specialist.person.getImageURL(), backupImage: "person")
-                                            .frame(width: 60, height: 60)
-                                            .cornerRadius(12.0)
-                                            .padding(.trailing)
-                                        VStack(alignment: .leading){
-                                            Text(specialist.person.lastName)
-                                            Text(specialist.person.firstName)
+                                        VStack(alignment: .leading) {
+                                            Text("Специализация:")
+                                                .font(Font.custom("Open Sans", size: 8))
+                                                .kerning(0.08)
+                                                .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                                            
+                                            Text("\(mainVM.allSpecializations.first(where: { $0.refKeyId ==  specialist.personLegals[index].specializationRefKeyId})!.valueRu)")
+                                                .font(Font.custom("Open Sans", size: 14))
+                                                .kerning(0.14)
+                                                .foregroundColor(Color(red: 0.21, green: 0.21, blue: 0.21))
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        VStack(alignment: .trailing) {
+                                            Text("Стаж:")
+                                                .font(Font.custom("Open Sans", size: 8))
+                                                .kerning(0.08)
+                                                .foregroundColor(Color(red: 0.51, green: 0.51, blue: 0.51))
+                                            
+                                            Text("\(specialist.personLegals[index].getWorkDuration())")
+                                                .font(Font.custom("Open Sans", size: 14))
+                                                .kerning(0.14)
+                                                .foregroundColor(Color(red: 0.21, green: 0.21, blue: 0.21))
                                         }
                                     }
+                                    .padding(.top, 4)
+                                    
                                 }
                             }
-                        })
+//                            .padding(12)
+//                            .background(.white)
+//                            .cornerRadius(12)
+//                            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 12)
+//                            .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 4)
+                        }
+                        .overlay(
+                            NavigationLink(destination: ProfileView(user: $specialistToDetail),
+                                           tag: specialist.person,
+                                           selection: $specialistToDetail)
+                            { EmptyView() }.opacity(0)
+                        )
                     }
                 }
                 
+                
+                
+                
                 if self.showFilter {
-                    VStack{
+                    ScrollView {
                         // Переключатель типа поиска
                         Picker("Выберите формат поиска", selection: $searchType) {
                             ForEach(["Поиск по специализации", "Поиск по ситуациям"], id: \.self) { option in
@@ -144,40 +213,81 @@ struct Search: View {
                                     )
                                 }
                             } else {
-                                Menu {
-                                    ForEach(0 ..< mainVM.allCases.count, id: \.self) { index in
-                                        Button("\(mainVM.allCases[index].caseNameRu)") {
-                                            withAnimation {
-                                                selectedCase = index
+                                VStack {
+                                    Menu {
+                                        ForEach(0 ..< mainVM.allCases.count, id: \.self) { index in
+                                            Button("\(mainVM.allCases[index].caseNameRu)") {
+                                                withAnimation {
+                                                    selectedCase = index
+                                                }
                                             }
                                         }
-                                    }
-                                } label: {
-                                    HStack {
-                                        ZStack(alignment: .leading) {
-                                            Text("Ситуация")
-                                                .font(.caption)
-                                                .foregroundColor(.gray)
-                                                .opacity(selectedCase == defaultValue ? 0 : 1)
-                                                .offset(y: selectedCase == defaultValue ? 0 : -20)
-                                            
-                                            Text(selectedCase == defaultValue ? "Ситуация" : "\(mainVM.allCases[selectedCase].caseNameRu)")
-                                                .font(Font.custom("Open Sans", size: 14))
-                                                .kerning(0.14)
-                                                .foregroundColor(selectedCase == defaultValue ? Color(red: 0.51, green: 0.51, blue: 0.51) : Color(red: 0.21, green: 0.21, blue: 0.21))
-                                                .frame(maxWidth: .infinity, minHeight: 20, maxHeight: 20, alignment: .topLeading)
-                                                .padding(.vertical, 8)
+                                    } label: {
+                                        HStack {
+                                            ZStack(alignment: .leading) {
+                                                Text("Ситуация")
+                                                    .font(.caption)
+                                                    .foregroundColor(.gray)
+                                                    .opacity(selectedCase == defaultValue ? 0 : 1)
+                                                    .offset(y: selectedCase == defaultValue ? 0 : -20)
+                                                
+                                                Text(selectedCase == defaultValue ? "Ситуация" : "\(mainVM.allCases[selectedCase].caseNameRu)")
+                                                    .font(Font.custom("Open Sans", size: 14))
+                                                    .kerning(0.14)
+                                                    .foregroundColor(selectedCase == defaultValue ? Color(red: 0.51, green: 0.51, blue: 0.51) : Color(red: 0.21, green: 0.21, blue: 0.21))
+                                                    .frame(maxWidth: .infinity, minHeight: 20, maxHeight: 20, alignment: .topLeading)
+                                                    .padding(.vertical, 8)
+                                            }
+                                            Spacer()
                                         }
-                                        Spacer()
+                                        .padding(12)
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                        .background(Color("Gray_bg"))
+                                        .cornerRadius(12)
+                                        .overlay(RoundedRectangle(cornerRadius: 12)
+                                            .inset(by: 1)
+                                            .stroke(Color(red: 0.94, green: 0.94, blue: 0.94), lineWidth: 2)
+                                        )
                                     }
-                                    .padding(12)
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                    .background(Color("Gray_bg"))
-                                    .cornerRadius(12)
-                                    .overlay(RoundedRectangle(cornerRadius: 12)
-                                        .inset(by: 1)
-                                        .stroke(Color(red: 0.94, green: 0.94, blue: 0.94), lineWidth: 2)
-                                    )
+                                    
+                                    // выбор этапа на котором находится ситуация
+                                    if selectedCase != defaultValue {
+                                        Menu {
+                                            ForEach(0 ..< mainVM.allSteps.count, id: \.self) { index in
+                                                Button("\(mainVM.allSteps[index].stepHintRu)") {
+                                                    withAnimation {
+                                                        selectedStep = index
+                                                    }
+                                                }
+                                            }
+                                        } label: {
+                                            HStack {
+                                                ZStack(alignment: .leading) {
+                                                    Text("Этап ситуации")
+                                                        .font(.caption)
+                                                        .foregroundColor(.gray)
+                                                        .opacity(selectedStep == defaultValue ? 0 : 1)
+                                                        .offset(y: selectedStep == defaultValue ? 0 : -20)
+                                                    
+                                                    Text(selectedStep == defaultValue ? "Этап ситуации" : "\(mainVM.allSteps[selectedStep].stepHintRu)")
+                                                        .font(Font.custom("Open Sans", size: 14))
+                                                        .kerning(0.14)
+                                                        .foregroundColor(selectedStep == defaultValue ? Color(red: 0.51, green: 0.51, blue: 0.51) : Color(red: 0.21, green: 0.21, blue: 0.21))
+                                                        .frame(maxWidth: .infinity, minHeight: 20, maxHeight: 20, alignment: .topLeading)
+                                                        .padding(.vertical, 8)
+                                                }
+                                                Spacer()
+                                            }
+                                            .padding(12)
+                                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                                            .background(Color("Gray_bg"))
+                                            .cornerRadius(12)
+                                            .overlay(RoundedRectangle(cornerRadius: 12)
+                                                .inset(by: 1)
+                                                .stroke(Color(red: 0.94, green: 0.94, blue: 0.94), lineWidth: 2)
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -279,6 +389,7 @@ struct Search: View {
                                 selectedCase = -1
                                 selectedLocation = -1
                                 selectedSpecialization = -1
+                                selectedStep = -1
                                 // to do - add more field
                             }
                         }, label: {
@@ -313,7 +424,9 @@ struct Search: View {
                 }
             }
         }
-        
+        .onAppear(perform:{
+            mainVM.getSpecialists(withAuth: !mainVM.userLogined)
+        })
     }
 
 }

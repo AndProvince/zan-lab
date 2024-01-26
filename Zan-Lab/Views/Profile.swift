@@ -9,14 +9,14 @@ import SwiftUI
 
 struct Profile: View {
     @EnvironmentObject var mainVM: MainViewModel
-    
+        
     var body: some View {
         VStack(alignment: .leading) {
             ScrollView {
                 if mainVM.showEditProfile {
                     ProfileEdit()
                 } else {
-                    ProfileView()
+                    ProfileView(user: $mainVM.user)
                 }
             }
         }

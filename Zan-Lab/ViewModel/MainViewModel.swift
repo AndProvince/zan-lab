@@ -26,7 +26,7 @@ class MainViewModel: ObservableObject {
     @Published var allLocations: [RefValue] = []
     @Published var allSpecializations: [RefValue] = []
     
-    @Published var user: User?
+    @Published var user: User? = User(id: -1, mobile: "")
     
     @Published var messageTitle = ""
     @Published var messageText = ""
@@ -36,7 +36,7 @@ class MainViewModel: ObservableObject {
     init() {
         self.getUser()
         
-        self.getSpecialists()
+        //self.getSpecialists()
         self.getAllCases()
         self.getAllSteps()
         
@@ -121,7 +121,7 @@ class MainViewModel: ObservableObject {
             switch result {
             case .success(let photoName):
                 print("photo uploaded")
-                self.user?.photoFileId = photoName
+                self.user!.photoFileId = photoName
             case .serverError(_):
                 // to do alert
                 print("Server error")
@@ -137,7 +137,7 @@ class MainViewModel: ObservableObject {
     }
     
     func deleteProfilePhoto() {
-        self.user?.photoFileId = ""
+        self.user!.photoFileId = ""
     }
     
     func sendOtp(login: String) {
@@ -251,9 +251,9 @@ class MainViewModel: ObservableObject {
         }
     }
     
-    func getSpecialists() {
+    func getSpecialists(withAuth: Bool) {
         print("get specialists called")
-        Requester.shared.getSpecialists(searchBody: SearchBody(groups: [], columnList: "*")) { result in
+        Requester.shared.getSpecialists(searchBody: SearchBody(groups: [], columnList: "*"), withAuth: withAuth) { result in
             //print(result)
             switch result {
             case .success(let answer):
