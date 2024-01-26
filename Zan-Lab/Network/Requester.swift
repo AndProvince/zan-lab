@@ -339,10 +339,10 @@ class Requester {
         self.request(request: request, onResult: onResult)
     }
     
-    func getSpecialists(searchBody: SearchBody, onResult: @escaping (Result<ResponseFor<[Specialist]>>) -> Void) {
+    func getSpecialists(searchBody: SearchBody, withAuth: Bool, onResult: @escaping (Result<ResponseFor<[Specialist]>>) -> Void) {
         let url = Endpoint.getSpecialists.absoluteURL
         let body = try! JSONEncoder().encode(searchBody)
-        let request = formRequest(url: url, data: body, noAuth: true)
+        let request = formRequest(url: url, data: body, noAuth: withAuth)
         self.doRequest(request: request, onResult: onResult)
     }
     

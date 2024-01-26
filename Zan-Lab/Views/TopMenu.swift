@@ -69,7 +69,7 @@ struct TopMenu: View {
                     })
                     
                 } label: {
-                    ImageView(url: mainVM.user?.getImageURL(), backupImage: "person")
+                    ImageView(url: mainVM.user!.getImageURL(), backupImage: "person")
                         .frame(width: 34, height: 34)
                         .cornerRadius(8.0)
                     Text(mainVM.user!.getName())

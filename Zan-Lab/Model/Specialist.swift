@@ -8,7 +8,7 @@
 import Foundation
 
 struct Specialist: Codable {
-    let person: Person
+    let person: User
     let personLegals: [Legal]
     let totalSpec: Int
     let totalArea: Int
@@ -38,6 +38,28 @@ struct Legal: Codable {
     let careerStartDate: String
     let activityAreasWithOffers: [Area]
     let workExperienceDuration: String
+    
+    func getWorkDuration() -> String {
+        if let index = workExperienceDuration.firstIndex(of: "Y") {
+            let years =  Int(workExperienceDuration.prefix(upTo: index))!
+            return "\(years) \(self.getYearWord(numberOfYears: years))"
+        } else {
+            return ""
+        }
+    }
+    
+    func getYearWord(numberOfYears: Int) -> String {
+        let remainder10 = numberOfYears % 10
+        let remainder100 = numberOfYears % 100
+
+        if remainder10 == 1 && remainder100 != 11 {
+            return "год"
+        } else if (remainder10 >= 2 && remainder10 <= 4) && (remainder100 < 10 || remainder100 >= 20) {
+            return "года"
+        } else {
+            return "лет"
+        }
+    }
 }
 
 struct Area: Codable {
