@@ -30,7 +30,7 @@ struct Search: View {
         return workExperience == 0 && selectedCase == self.defaultValue && selectedLocation == self.defaultValue && selectedSpecialization == self.defaultValue
     }
     
-    @State private var specialistToDetail: User? // = User(id: -1, mobile: "")
+    @State private var specialistToDetail: User?
     
     var body: some View {
         VStack(alignment: .center) {
@@ -139,19 +139,21 @@ struct Search: View {
                                     
                                 }
                             }
-//                            .padding(12)
-//                            .background(.white)
-//                            .cornerRadius(12)
-//                            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 12)
-//                            .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 4)
                         }
                         .overlay(
                             NavigationLink(destination: ProfileView(user: $specialistToDetail),
                                            tag: specialist.person,
                                            selection: $specialistToDetail)
-                            { EmptyView() }.opacity(0)
+                            { EmptyView() }
+                                .opacity(0)
                         )
+//                        .padding(12)
+//                        .background(.white)
+//                        .cornerRadius(12)
+//                        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 12)
+//                        .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 4)
                     }
+
                 }
                 
                 
