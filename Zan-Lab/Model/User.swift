@@ -11,9 +11,9 @@ struct User: Codable, Hashable {
     var id: Int
     var lastName: String?
     var firstName: String?
-    var mobile: String
+    var mobile: String?
     var email: String?
-    var contacts: [String]?
+    var contacts: [Contact]?
     var about: String?
     var photoFileId: String?
     var locationRefKeyId: Int?
@@ -34,12 +34,22 @@ struct User: Codable, Hashable {
     
     func getMobile() -> String {
         let mask = "+X (XXX) XXX-XX-XX"
-        return FormatByMask(with: mask, phone: mobile)
+        if let number = mobile {
+            return FormatByMask(with: mask, phone: number)
+        } else {
+            return ""
+        }
     }
     
     func isEmail() -> Bool {
         return ((email?.isEmpty) != nil)
     }
+}
+
+struct Contact: Codable, Hashable {
+    let id: Int
+    let value: String
+    let typeRefKeyId: Int
 }
 
 //struct AuthResult: Codable {

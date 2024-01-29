@@ -16,12 +16,12 @@ struct Profile: View {
                 if mainVM.showEditProfile {
                     ProfileEdit()
                 } else {
-                    ProfileView(user: $mainVM.user)
+                    ProfileView(user: mainVM.user)
                 }
             }
         }
         .background(Color("Gray_bg"))
-        .navigationTitle(mainVM.user!.getName())
+        .navigationTitle(mainVM.user.getName())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing){
                 Button(action: { mainVM.showEditProfile.toggle() },
