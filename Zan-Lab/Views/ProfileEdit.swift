@@ -44,7 +44,7 @@ struct ProfileEdit: View {
                 })
                 
             } label: {
-                ImageView(url: mainVM.user!.getImageURL(), backupImage: "person")
+                ImageView(url: mainVM.user.getImageURL(), backupImage: "person")
             }
         }
         .frame(width: 296, height: 304)
@@ -296,12 +296,12 @@ struct ProfileEdit: View {
             }
             
             Button(action: {
-                mainVM.user!.lastName = self.lastName
-                mainVM.user!.firstName = self.firstName
-                mainVM.user!.locationRefKeyId = mainVM.allLocations[self.selectedLocation].refKeyId
+                mainVM.user.lastName = self.lastName
+                mainVM.user.firstName = self.firstName
+                mainVM.user.locationRefKeyId = mainVM.allLocations[self.selectedLocation].refKeyId
                 //mainVM.user?.mobile = self.mobile
                 //mainVM.user?.email = self.email
-                mainVM.user!.about = self.about
+                mainVM.user.about = self.about
                 mainVM.putUser()
                 mainVM.showEditProfile.toggle()
             }, label: {
@@ -323,22 +323,22 @@ struct ProfileEdit: View {
         )
         .onAppear(perform: {
             if self.lastName == "" {
-                self.lastName = mainVM.user!.lastName ?? ""
+                self.lastName = mainVM.user.lastName ?? ""
             }
             if self.firstName == "" {
-                self.firstName = mainVM.user!.firstName ?? ""
+                self.firstName = mainVM.user.firstName ?? ""
             }
             if self.selectedLocation == 0 {
-                self.selectedLocation = mainVM.allLocations.firstIndex(where: { $0.refKeyId == mainVM.user!.locationRefKeyId }) ?? 0
+                self.selectedLocation = mainVM.allLocations.firstIndex(where: { $0.refKeyId == mainVM.user.locationRefKeyId }) ?? 0
             }
             if self.mobile == "" {
-                self.mobile = mainVM.user!.getMobile() ?? ""
+                self.mobile = mainVM.user.getMobile() ?? ""
             }
             if self.email == "" {
-                self.email = mainVM.user!.email ?? ""
+                self.email = mainVM.user.email ?? ""
             }
             if self.about == "" {
-                self.about = mainVM.user!.about ?? ""
+                self.about = mainVM.user.about ?? ""
             }
         })
         .sheet(isPresented: $isImagePickerPresented, content: {

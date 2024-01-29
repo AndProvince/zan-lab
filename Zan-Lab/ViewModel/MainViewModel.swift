@@ -26,7 +26,7 @@ class MainViewModel: ObservableObject {
     @Published var allLocations: [RefValue] = []
     @Published var allSpecializations: [RefValue] = []
     
-    @Published var user: User? = User(id: -1, mobile: "")
+    @Published var user: User = User(id: -1, mobile: "")
     
     @Published var messageTitle = ""
     @Published var messageText = ""
@@ -96,7 +96,7 @@ class MainViewModel: ObservableObject {
     
     func putUser() {
         print("put user called")
-        Requester.shared.putUser(user: self.user!) { result in
+        Requester.shared.putUser(user: self.user) { result in
             switch result {
             case .success(_):
                 print("user uploaded")
@@ -121,7 +121,7 @@ class MainViewModel: ObservableObject {
             switch result {
             case .success(let photoName):
                 print("photo uploaded")
-                self.user!.photoFileId = photoName
+                self.user.photoFileId = photoName
             case .serverError(_):
                 // to do alert
                 print("Server error")
@@ -137,7 +137,7 @@ class MainViewModel: ObservableObject {
     }
     
     func deleteProfilePhoto() {
-        self.user!.photoFileId = ""
+        self.user.photoFileId = ""
     }
     
     func sendOtp(login: String) {
